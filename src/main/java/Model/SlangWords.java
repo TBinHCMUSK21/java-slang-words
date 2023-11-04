@@ -61,11 +61,12 @@ public class SlangWords {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0;i<this.definitions.size();i++){
+        for (String definition : this.definitions) {
             builder.append(this.slangWords);
             builder.append('`');
-            builder.append(this.definitions.get(i));
+            builder.append(definition);
         }
-        return builder.toString();
+        String string = builder.toString();
+        return string;
     }
 }
