@@ -6,5 +6,55 @@
  */
 
 package Model;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ListSlangWords {
+    private HashMap<String, List<String>> listSlangWords;
+
+    /**
+     * Default Constructor
+     */
+    public ListSlangWords() {
+        this.listSlangWords=new HashMap<>();
+    }
+    /**
+     * Constructor with parameters
+     * @param listSlangWords: List of the Slang Words
+     */
+    public ListSlangWords(HashMap<String, List<String>> listSlangWords) {
+        this.listSlangWords = listSlangWords;
+    }
+
+    /**
+     * Getter the listSlangWords
+     * @return listSlangWords
+     */
+    public HashMap<String, List<String>> getListSlangWords() {
+        return listSlangWords;
+    }
+
+    /**
+     * Setter listSlangWords
+     * @param listSlangWords: List of Slang Words
+     */
+    public void setListSlangWords(HashMap<String, List<String>> listSlangWords) {
+        this.listSlangWords = listSlangWords;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry<String, List<String>> entry : listSlangWords.entrySet()) {
+            String key = entry.getKey();
+            List<String> value = entry.getValue();
+            SlangWords slangWords = new SlangWords(key,value);
+            String string  = slangWords.toString();
+            builder.append(string);
+        }
+        String result = builder.toString();
+        return result;
+    }
 }

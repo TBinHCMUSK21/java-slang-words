@@ -65,8 +65,8 @@ public class SlangWords {
             builder.append(this.slangWords);
             builder.append('`');
             builder.append(definition);
+            builder.append('\n');
         }
-        String string = builder.toString();
-        return string;
+        return builder.toString();
     }
 }
