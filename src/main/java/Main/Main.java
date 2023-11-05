@@ -9,6 +9,7 @@ package Main;
 
 
 import View.HomePage;
+import View.SearchSlang;
 
 import javax.swing.*;
 
@@ -16,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new HomePage().setVisible(true);
+                new SearchSlang().setVisible(true);
             }
         });
 
