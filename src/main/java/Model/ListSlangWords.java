@@ -53,8 +53,7 @@ public class ListSlangWords {
             String string  = slangWords.toString();
             builder.append(string);
         }
-        String result = builder.toString();
-        return result;
+        return builder.toString();
     }
     public void addSlangWord(SlangWords slangWords){
         this.listSlangWords.put(slangWords.getSlangWords(),slangWords.getDefinitions());

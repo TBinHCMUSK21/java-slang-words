@@ -27,7 +27,7 @@ public class ListSlangWordsDao implements InterfaceDao<ListSlangWords> {
 
     /**
      *
-     * @return
+     * @return Use the Bill Pugh Singleton Implementation
      */
     public static ListSlangWordsDao getInstance() {
         return ListSlangWordsDaoHelper.INSTANCE;
@@ -41,14 +41,15 @@ public class ListSlangWordsDao implements InterfaceDao<ListSlangWords> {
     }
 
     /**
-     * Get all the slang word in filepath = "slang.txt'
-     * @return
+     * Get all the slang word in filepath = "slang.txt"
+     * @return list of slang words
      */
     @Override
     public ListSlangWords getAll() {
         ListSlangWords listSlangWords = new ListSlangWords();
         try{
             BufferedReader fin = new BufferedReader(new FileReader(filePath));
+            fin.readLine();
             while(true){
                 String str = fin.readLine();
                 if (str == null) {
