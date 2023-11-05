@@ -25,7 +25,7 @@ public class ListSlangWord {
      * Getter list of slang words
      * @return listSlangWord: list of slang words
      */
-    public HashMap<String, LinkedHashSet<String>> getlistSlangWord() {
+    public HashMap<String, LinkedHashSet<String>> getListSlangWord() {
         return listSlangWord;
     }
 

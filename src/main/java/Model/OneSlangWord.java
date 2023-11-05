@@ -9,14 +9,14 @@ package Model;
 
 import java.util.LinkedHashSet;
 
-public class SlangWord {
+public class OneSlangWord {
     private String slang;
     private LinkedHashSet<String> definitions;
 
     /**
      * Default Constructor
      */
-    public SlangWord(){
+    public OneSlangWord(){
         this.slang = "";
         this.definitions = new LinkedHashSet<>();
     }
@@ -26,7 +26,7 @@ public class SlangWord {
      * @param slang: slang word
      * @param definitions: list of definitions
      */
-    public SlangWord(String slang, LinkedHashSet<String> definitions){
+    public OneSlangWord(String slang, LinkedHashSet<String> definitions){
         super();
         this.slang=slang;
         this.definitions=definitions;
