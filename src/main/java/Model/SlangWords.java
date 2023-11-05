@@ -52,7 +52,6 @@ public class SlangWords {
     }
     /**
      * Setter of list of definitions
-     * @param definitions: list of definitions
      */
     public void setDefinitions(List<String> definitions) {
         this.definitions = definitions;
