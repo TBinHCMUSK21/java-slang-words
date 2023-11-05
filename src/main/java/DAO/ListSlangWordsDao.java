@@ -51,13 +51,16 @@ public class ListSlangWordsDao implements InterfaceDao<ListSlangWords> {
             BufferedReader fin = new BufferedReader(new FileReader(filePath));
             while(true){
                 String str = fin.readLine();
-                String[] slang = str.split("`");
-                List<String> definitions = Arrays.asList(slang[1].split("\\|"));
-                SlangWords slangWords = new SlangWords(slang[0],definitions);
-                listSlangWords.addSlangWord(slangWords);
                 if (str == null) {
                     break;
                 }
+                String[] slang = str.split("`");
+                if (slang.length <= 1){
+                    continue;
+                }
+                List<String> definitions = Arrays.asList(slang[1].split("\\|"));
+                SlangWords slangWords = new SlangWords(slang[0],definitions);
+                listSlangWords.addSlangWord(slangWords);
             }
             fin.close();
         }
