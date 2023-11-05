@@ -43,7 +43,6 @@ public class ListSlangWords {
     public void setListSlangWords(HashMap<String, List<String>> listSlangWords) {
         this.listSlangWords = listSlangWords;
     }
-
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -56,5 +55,8 @@ public class ListSlangWords {
         }
         String result = builder.toString();
         return result;
+    }
+    public void addSlangWord(SlangWords slangWords){
+        this.listSlangWords.put(slangWords.getSlangWords(),slangWords.getDefinitions());
     }
 }
