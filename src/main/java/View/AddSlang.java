@@ -17,6 +17,9 @@ public class AddSlang extends JFrame {
 
     private JTextField definitionField;
 
+    /**
+     * The main frame
+     */
     public AddSlang() {
         setTitle("Slang Dictionary Search");
         initializeComponents();
@@ -26,6 +29,9 @@ public class AddSlang extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Initial the sidebar in the left of frame
+     */
     private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
 
@@ -35,6 +41,11 @@ public class AddSlang extends JFrame {
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
 
+    /**
+     * Create the main content in the center
+     * @param font: Font of the content
+     * @return mainContent: The main JPanel content in center
+     */
     private JPanel createMainContent(Font font) {
         JPanel mainContent = new JPanel(new BorderLayout());
         mainContent.setBackground(Color.WHITE);
@@ -43,6 +54,11 @@ public class AddSlang extends JFrame {
         return mainContent;
     }
 
+    /**
+     * Initial the title in the center top of the main content
+     * @return mainTitle: The main title of the content
+     */
+
     private JLabel createTitle() {
         JLabel mainTitle = new JLabel("Add a new slang words", SwingConstants.CENTER);
         mainTitle.setFont(new Font("Arial", Font.BOLD, 30));
@@ -50,12 +66,23 @@ public class AddSlang extends JFrame {
         return mainTitle;
     }
 
+    /**
+     * Add the input panel to get input from the user
+     * @param font: font of the content
+     * @return addPanel: The JPanel of the input
+     */
     private JPanel createAddPanel(Font font) {
-        JPanel searchPanel = new JPanel();
-        searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.PAGE_AXIS));
-        searchPanel.add(createInputPanel(font), BorderLayout.NORTH);
-        return searchPanel;
+        JPanel addPanel = new JPanel();
+        addPanel.setLayout(new BoxLayout(addPanel, BoxLayout.PAGE_AXIS));
+        addPanel.add(createInputPanel(font), BorderLayout.NORTH);
+        return addPanel;
     }
+
+    /**
+     * Design the input panel
+     * @param font: font of the content
+     * @return inputPanel: the JPanel of the input
+     */
 
     private JPanel createInputPanel(Font font) {
         JPanel inputPanel = new JPanel();
@@ -102,15 +129,16 @@ public class AddSlang extends JFrame {
         return inputPanel;
     }
 
-    private JButton createButton(String title, Font font, ActionListener action) {
+    /**
+     * Create the button
+     * @param title: The title of the button
+     * @param font: Font of the button
+     * @return button: JButton of the button
+     */
+    private JButton createButton(String title, Font font) {
         JButton button = new JButton(title);
         button.setFont(font);
-        button.addActionListener(action);
         return button;
-    }
-
-    private JButton createButton(String title, Font font) {
-        return createButton(title, font, null);
     }
 
 
