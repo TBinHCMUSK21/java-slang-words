@@ -2,7 +2,7 @@
  * View.QuizDefinition
  * Create by Bin
  * Date 11/6/23, 6:11 PM
- * Description:
+ * Description: Quiz definition view
  */
 
 package View;

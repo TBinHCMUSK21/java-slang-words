@@ -2,7 +2,7 @@
  * View.QuizSlang
  * Create by Bin
  * Date 11/6/23, 6:11 PM
- * Description:
+ * Description: Quiz Slang View
  */
 
 package View;
