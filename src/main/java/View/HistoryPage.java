@@ -58,19 +58,6 @@ public class HistoryPage extends JFrame {
         return searchPanel;
     }
 
-
-
-    private JButton createButton(String title, Font font, ActionListener action) {
-        JButton button = new JButton(title);
-        button.setFont(font);
-        button.addActionListener(action);
-        return button;
-    }
-
-    private JButton createButton(String title, Font font) {
-        return createButton(title, font, null);
-    }
-
     private JScrollPane createListScroller(Font font) {
         listModel = new DefaultListModel<>();
         JList<String> wordList = new JList<>(listModel);

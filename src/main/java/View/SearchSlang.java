@@ -21,8 +21,8 @@ public class SearchSlang extends JFrame {
         initializeComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
-        setLocationRelativeTo(null); // Center the window
-        setVisible(true); // Make the window visible
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private void initializeComponents() {
