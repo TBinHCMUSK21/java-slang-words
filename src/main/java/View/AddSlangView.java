@@ -84,8 +84,11 @@ public class AddSlangView extends JFrame {
      */
 
     private JPanel createInputPanel(Font font) {
+        // Initial the input panel
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridBagLayout());
+
+        // Create a border
         inputPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -93,38 +96,43 @@ public class AddSlangView extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(5, 5, 5, 5);
 
+        // Label of the field input slang
         JLabel slangLabel = new JLabel("Slang Word:");
         slangLabel.setFont(font);
         gbc.weightx = 0.1;
         inputPanel.add(slangLabel, gbc);
 
+        // Field to input the slang word
         slangField = new JTextField(15);
         slangField.setFont(font);
         gbc.weightx = 1.0;
         inputPanel.add(slangField, gbc);
 
+        // Label of the field input definition
         JLabel definitionLabel = new JLabel("Definition Word:");
         definitionLabel.setFont(font);
         gbc.weightx = 0.1;
         inputPanel.add(definitionLabel, gbc);
 
+        // Field to input the definition
         definitionField = new JTextField(15);
         definitionField.setFont(font);
         gbc.weightx = 1.0;
         inputPanel.add(definitionField, gbc);
 
+        // Button add to add the new slang
         JButton addButton = createButton("Add", font);
         gbc.weightx = 0.0;
-
         inputPanel.add(addButton, gbc);
 
-
+        // Deal with the space empty to push the content to the top
         GridBagConstraints gbcFiller = new GridBagConstraints();
         gbcFiller.gridwidth = GridBagConstraints.REMAINDER;
         gbcFiller.fill = GridBagConstraints.BOTH;
         gbcFiller.weightx = 1;
         gbcFiller.weighty = 100;
         inputPanel.add(new JPanel(), gbcFiller);
+
         return inputPanel;
     }
 
