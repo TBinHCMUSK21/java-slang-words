@@ -11,10 +11,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AddSlangView extends JFrame {
-    private SlideBarView sidebar;
-    private JTextField slangField;
-
-    private JTextField definitionField;
 
     /**
      * The main frame
@@ -35,7 +31,7 @@ public class AddSlangView extends JFrame {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
 
         setLayout(new BorderLayout());
-        sidebar = new SlideBarView();
+        SlideBarView sidebar = new SlideBarView();
         add(sidebar, BorderLayout.WEST);
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
@@ -103,7 +99,7 @@ public class AddSlangView extends JFrame {
         inputPanel.add(slangLabel, gbc);
 
         // Field to input the slang word
-        slangField = new JTextField(15);
+        JTextField slangField = new JTextField(15);
         slangField.setFont(font);
         gbc.weightx = 1.0;
         inputPanel.add(slangField, gbc);
@@ -115,7 +111,7 @@ public class AddSlangView extends JFrame {
         inputPanel.add(definitionLabel, gbc);
 
         // Field to input the definition
-        definitionField = new JTextField(15);
+        JTextField definitionField = new JTextField(15);
         definitionField.setFont(font);
         gbc.weightx = 1.0;
         inputPanel.add(definitionField, gbc);
