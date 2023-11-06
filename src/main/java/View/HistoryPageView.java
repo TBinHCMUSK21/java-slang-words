@@ -29,31 +29,28 @@ public class HistoryPageView extends JFrame {
      * Add the sidebar
      */
     private void initializeComponents() {
-        Font mainFont = new Font("Arial", Font.PLAIN, 18);
-
         setLayout(new BorderLayout());
         SlideBarView sidebar = new SlideBarView();
         add(sidebar, BorderLayout.WEST);
-
-        add(createMainContent(mainFont), BorderLayout.CENTER);
+        add(createMainContent(), BorderLayout.CENTER);
     }
 
     /**
      * Create a main content
-     * @param font: font of the content
+     *
      * @return mainContent: The main content
      */
-    private JPanel createMainContent(Font font) {
+    private JPanel createMainContent() {
         JPanel mainContent = new JPanel(new BorderLayout());
         mainContent.setBackground(Color.WHITE);
         mainContent.add(createTitle(), BorderLayout.NORTH);
-        mainContent.add(createHistoryPane(font), BorderLayout.CENTER);
+        mainContent.add(createHistoryPane(), BorderLayout.CENTER);
         return mainContent;
     }
 
     /**
      * Create a title of the frame
-     * @return mainTitle: JLable for a title
+     * @return mainTitle: JLabel for a title
      */
     private JLabel createTitle() {
         JLabel mainTitle = new JLabel("History Search", SwingConstants.CENTER);
@@ -64,23 +61,28 @@ public class HistoryPageView extends JFrame {
 
     /**
      * Create a history pane to display the history
-     * @param font: font of the main content
+     *
      * @return historyPane: The JPanel to display the history search
      */
-    private JPanel createHistoryPane(Font font) {
+    private JPanel createHistoryPane() {
         JPanel historyPane = new JPanel();
         historyPane.setLayout(new BoxLayout(historyPane, BoxLayout.PAGE_AXIS));
-        historyPane.add(createListScroller(font), BorderLayout.CENTER);
+        historyPane.add(createListScroller(), BorderLayout.CENTER);
         return historyPane;
     }
 
     /**
-     * A table to display the list of distory
-     * @param font: font of the content
-     * @return listScroller: JSrollPane of the history search
+     * A table to display the list of slang words
+     *
+     * @return listScroller: JScrollPane of the history search
      */
-    private JScrollPane createListScroller(Font font) {
-        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {};
+    private JScrollPane createListScroller() {
+        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {
+            public boolean isCellEditable(int row, int column) {
+                // Not edit the table
+                return false;
+            }
+        };
 
         // Create Table
         Font tableFont = new Font("Arial", Font.PLAIN, 16);
