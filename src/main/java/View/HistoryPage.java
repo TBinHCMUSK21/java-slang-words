@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 public class HistoryPage extends JFrame {
     private SlideBarView sidebar;
     private DefaultListModel<String> listModel;
-    private JTextField searchField;
 
     public HistoryPage() {
         setTitle("Slang Dictionary Search");
