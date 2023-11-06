@@ -11,7 +11,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class QuizSlangView extends JFrame{
-    private SlideBarView sidebar;
+    /**
+     * The main frame
+     */
     public QuizSlangView() {
         setTitle("Slang Dictionary Search");
         initializeComponents();
@@ -20,15 +22,23 @@ public class QuizSlangView extends JFrame{
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
+    /**
+     * The initial components add sidebar
+     */
     public void initializeComponents(){
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
-
         setLayout(new BorderLayout());
-        sidebar = new SlideBarView();
+        SlideBarView sidebar = new SlideBarView();
         add(sidebar, BorderLayout.WEST);
-
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
+
+    /**
+     * Create the main content of the frame
+     * @param font: font of the content
+     * @return mainContent: the panel of the content
+     */
     private JPanel createMainContent(Font font){
         JPanel mainContent = new JPanel(new BorderLayout());
         mainContent.setBackground(Color.WHITE);
@@ -36,12 +46,23 @@ public class QuizSlangView extends JFrame{
         mainContent.add(createContentPanel(font), BorderLayout.CENTER);
         return mainContent;
     }
+
+    /**
+     * The title of the content
+     * @return mainTitle: A Label of the title for content
+     */
     private JLabel createTitle() {
         JLabel mainTitle = new JLabel("Quiz Slang Words", SwingConstants.CENTER);
         mainTitle.setFont(new Font("Arial", Font.BOLD, 30));
         mainTitle.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         return mainTitle;
     }
+
+    /**
+     * The panel of main content
+     * @param font: font of the content
+     * @return contentPage: The main content of page
+     */
     private JPanel createContentPanel(Font font) {
         JPanel contentPage = new JPanel();
         contentPage.setLayout(new GridBagLayout());
@@ -49,7 +70,7 @@ public class QuizSlangView extends JFrame{
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        // Tiêu đề của chương trình
+        // The title
         JLabel titleLabel = new JLabel("Find out the correct answer");
         titleLabel.setFont(font.deriveFont(Font.BOLD, 24f));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -60,33 +81,33 @@ public class QuizSlangView extends JFrame{
         gbc.insets = new Insets(10, 10, 10, 10);
         contentPage.add(titleLabel, gbc);
 
-        // Câu hỏi
+        // Question
         JLabel questionLabel = new JLabel("Slang: ");
         questionLabel.setFont(new Font("Arial", Font.BOLD, 18));
         gbc.gridy++;
         gbc.gridwidth = 2;
         contentPage.add(questionLabel, gbc);
 
-        // Thêm các nút chọn
+        // Add the button
         JToggleButton buttonA = new JToggleButton("A. Option 1");
         JToggleButton buttonB = new JToggleButton("B. Option 2");
         JToggleButton buttonC = new JToggleButton("C. Option 3");
         JToggleButton buttonD = new JToggleButton("D. Option 4");
 
-        // Thiết lập mặc định của nút
+        // Button figure
         buttonA.setFont(font);
         buttonB.setFont(font);
         buttonC.setFont(font);
         buttonD.setFont(font);
 
-        // Thêm các nút vào một group
+        // Add the button to group
         ButtonGroup group = new ButtonGroup();
         group.add(buttonA);
         group.add(buttonB);
         group.add(buttonC);
         group.add(buttonD);
 
-        // Lần lượt thêm các nút vào trong layout
+        // Add the button to layout
         GridBagConstraints gbcButtons = new GridBagConstraints();
         gbcButtons.fill = GridBagConstraints.BOTH;
         gbcButtons.insets = new Insets(5, 5, 5, 5);
@@ -96,19 +117,19 @@ public class QuizSlangView extends JFrame{
         gbcButtons.gridy = 2;
         gbcButtons.gridwidth = 1;
 
-        // Thêm nút một
+        // Add first button
         contentPage.add(buttonA, gbcButtons);
 
-        // Thêm nút hai
+        // Add second button
         gbcButtons.gridx = 1;
         contentPage.add(buttonB, gbcButtons);
 
-        // Thêm nút ba
+        // Add third button
         gbcButtons.gridx = 0;
         gbcButtons.gridy = 3;
         contentPage.add(buttonC, gbcButtons);
 
-        // Thêm nút bốn
+        // Add fourth button
         gbcButtons.gridx = 1;
         contentPage.add(buttonD, gbcButtons);
 
