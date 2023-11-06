@@ -30,11 +30,11 @@ public class SearchSlang extends JFrame {
         mainTitle.setFont(new Font("Arial", Font.BOLD, 30));
         mainTitle.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
 
-        // Search panel at the top
+        // Tạo phần ở giữa
         JPanel searchPanel = new JPanel();
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.PAGE_AXIS));
 
-        // Panel for input field and label
+        // Tạo tiêu đề và thanh search
         JPanel inputPanel = new JPanel((new FlowLayout(FlowLayout.CENTER, 0, 0)));
 
         JTextField searchField = new JTextField(15);
@@ -43,13 +43,12 @@ public class SearchSlang extends JFrame {
         JLabel contentTitle = new JLabel("Input the slang word:");
         contentTitle.setFont(myFont);
 
-
-
+        // Tạo hai nút bấm
         JButton findButton = new JButton("Find");
-        findButton.setFont(myFont); // Set the font for the button
+        findButton.setFont(myFont);
 
         JButton clearButton = new JButton("Clear");
-        clearButton.setFont(myFont); // Set the font for the button
+        clearButton.setFont(myFont);
 
         inputPanel.add(contentTitle);
         inputPanel.add(searchField);
@@ -57,16 +56,26 @@ public class SearchSlang extends JFrame {
         inputPanel.add(clearButton);
 
         searchPanel.add(inputPanel,BorderLayout.NORTH);
-        // Word list in the center
+
+        // Danh sách các giá trị tìm kiếm được
         DefaultListModel<String> listModel = new DefaultListModel<>();
         JList<String> wordList = new JList<>(listModel);
         JScrollPane listScroller = new JScrollPane(wordList);
-        listScroller.setPreferredSize(new Dimension(500, 300));
+        listScroller.setPreferredSize(new Dimension(500, 500));
+
+        // Thiết lập
+        wordList.setFont(myFont);
+        listScroller.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        wordList.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // Thêm các thành phần text vào đây
+        listModel.addElement("jrfnjer");
+
         searchPanel.add(listScroller);
 
         mainContent.add(searchPanel, BorderLayout.CENTER);
 
-        // Adding action to clear button
+        // Thêm action cho nút clear
         clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -84,6 +93,7 @@ public class SearchSlang extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
+
 
     }
 
