@@ -1,7 +1,7 @@
 /*
- * View.EditSlang
+ * View.DeleteSlang
  * Create by Bin
- * Date 11/6/23, 10:27 AM
+ * Date 11/6/23, 11:00 AM
  * Description:
  */
 
@@ -13,11 +13,11 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class EditSlang extends JFrame {
+public class DeleteSlangView extends JFrame{
     private SlideBarView sidebar;
     private DefaultListModel<String> listModel;
     private JTextField slangField;
-    public EditSlang() {
+    public DeleteSlangView() {
         setTitle("Slang Dictionary Search");
         initializeComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,7 +44,7 @@ public class EditSlang extends JFrame {
         return mainContent;
     }
     private JLabel createTitle() {
-        JLabel mainTitle = new JLabel("Edit slang word", SwingConstants.CENTER);
+        JLabel mainTitle = new JLabel("Delete slang word", SwingConstants.CENTER);
         mainTitle.setFont(new Font("Arial", Font.BOLD, 30));
         mainTitle.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         return mainTitle;
@@ -81,6 +81,10 @@ public class EditSlang extends JFrame {
 
         inputPanel.add(findButton, gbc);
 
+        JButton deleteButton = createButton("Delete", font);
+        gbc.weightx = 0.0;
+        inputPanel.add(deleteButton, gbc);
+
 
         GridBagConstraints gbcFiller = new GridBagConstraints();
         gbcFiller.gridwidth = GridBagConstraints.REMAINDER;
@@ -108,7 +112,12 @@ public class EditSlang extends JFrame {
         return searchPanel;
     }
     private JScrollPane createListScroller() {
-        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {};
+        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {
+            public boolean isCellEditable(int row, int column) {
+                // Không cho phép chỉnh sửa bất kỳ ô nào
+                return false;
+            }
+        };
 
         // Tạo bảng với model đã tạo
         Font tableFont = new Font("Arial", Font.PLAIN, 16);
@@ -130,7 +139,7 @@ public class EditSlang extends JFrame {
         // Thêm bảng vào JScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
         Dimension preferredSize = scrollPane.getPreferredSize();
-        preferredSize.height = 370;
+        preferredSize.height = 330;
         scrollPane.setPreferredSize(preferredSize);
 
         // Thiết lập cửa sổ

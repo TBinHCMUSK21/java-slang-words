@@ -1,7 +1,7 @@
 /*
- * View.ResetSlang
+ * View.EditSlang
  * Create by Bin
- * Date 11/6/23, 11:05 AM
+ * Date 11/6/23, 10:27 AM
  * Description:
  */
 
@@ -13,11 +13,11 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class ResetSlang extends JFrame {
+public class EditSlangView extends JFrame {
     private SlideBarView sidebar;
     private DefaultListModel<String> listModel;
     private JTextField slangField;
-    public ResetSlang() {
+    public EditSlangView() {
         setTitle("Slang Dictionary Search");
         initializeComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,7 +44,7 @@ public class ResetSlang extends JFrame {
         return mainContent;
     }
     private JLabel createTitle() {
-        JLabel mainTitle = new JLabel("Reset Slang Words", SwingConstants.CENTER);
+        JLabel mainTitle = new JLabel("Edit slang word", SwingConstants.CENTER);
         mainTitle.setFont(new Font("Arial", Font.BOLD, 30));
         mainTitle.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         return mainTitle;
@@ -65,16 +65,22 @@ public class ResetSlang extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        JLabel slangLabel = new JLabel("Do you want to reset the origin slang dictionary");
-        slangLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        JLabel slangLabel = new JLabel("Slang Word:");
         slangLabel.setFont(font);
         gbc.weightx = 0.1;
         inputPanel.add(slangLabel, gbc);
 
-        JButton resetButton = createButton("Reset", font);
+        slangField = new JTextField(15);
+        slangField.setFont(font);
+        gbc.weightx = 1.0;
+        inputPanel.add(slangField, gbc);
+
+
+        JButton findButton = createButton("Find", font);
         gbc.weightx = 0.0;
 
-        inputPanel.add(resetButton, gbc);
+        inputPanel.add(findButton, gbc);
+
 
         GridBagConstraints gbcFiller = new GridBagConstraints();
         gbcFiller.gridwidth = GridBagConstraints.REMAINDER;
@@ -102,12 +108,7 @@ public class ResetSlang extends JFrame {
         return searchPanel;
     }
     private JScrollPane createListScroller() {
-        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {
-            public boolean isCellEditable(int row, int column) {
-                // Không cho phép chỉnh sửa bất kỳ ô nào
-                return false;
-            }
-        };
+        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {};
 
         // Tạo bảng với model đã tạo
         Font tableFont = new Font("Arial", Font.PLAIN, 16);
@@ -129,7 +130,7 @@ public class ResetSlang extends JFrame {
         // Thêm bảng vào JScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
         Dimension preferredSize = scrollPane.getPreferredSize();
-        preferredSize.height = 400;
+        preferredSize.height = 370;
         scrollPane.setPreferredSize(preferredSize);
 
         // Thiết lập cửa sổ

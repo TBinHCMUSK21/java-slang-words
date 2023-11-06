@@ -9,12 +9,10 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class HomePage extends JFrame {
+public class HomePageView extends JFrame {
     private SlideBarView sidebar;
-    public HomePage() {
+    public HomePageView() {
         setLayout(new BorderLayout());
         sidebar = new SlideBarView();
         add(sidebar, BorderLayout.WEST);

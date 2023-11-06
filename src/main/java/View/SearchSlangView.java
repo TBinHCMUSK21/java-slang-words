@@ -11,12 +11,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class SearchSlang extends JFrame {
+public class SearchSlangView extends JFrame {
     private SlideBarView sidebar;
     private DefaultListModel<String> listModel;
     private JTextField searchField;
 
-    public SearchSlang() {
+    public SearchSlangView() {
         setTitle("Slang Dictionary Search");
         initializeComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,5 +1,5 @@
 /*
- * View.QuizSlang
+ * View.QuizDefinition
  * Create by Bin
  * Date 11/6/23, 6:11 PM
  * Description:
@@ -10,9 +10,9 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-public class QuizSlang extends JFrame{
+public class QuizDefinitionView extends JFrame{
     private SlideBarView sidebar;
-    public QuizSlang() {
+    public QuizDefinitionView() {
         setTitle("Slang Dictionary Search");
         initializeComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,7 +37,7 @@ public class QuizSlang extends JFrame{
         return mainContent;
     }
     private JLabel createTitle() {
-        JLabel mainTitle = new JLabel("Quiz Slang Words", SwingConstants.CENTER);
+        JLabel mainTitle = new JLabel("Quiz Definition Slang", SwingConstants.CENTER);
         mainTitle.setFont(new Font("Arial", Font.BOLD, 30));
         mainTitle.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         return mainTitle;
@@ -61,7 +61,7 @@ public class QuizSlang extends JFrame{
         contentPage.add(titleLabel, gbc);
 
         // Câu hỏi
-        JLabel questionLabel = new JLabel("Slang: ");
+        JLabel questionLabel = new JLabel("Definition: ");
         questionLabel.setFont(new Font("Arial", Font.BOLD, 18));
         gbc.gridy++;
         gbc.gridwidth = 2;

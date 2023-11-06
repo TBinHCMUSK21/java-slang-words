@@ -11,9 +11,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class RandomSlang extends JFrame{
+public class RandomSlangView extends JFrame{
     private SlideBarView sidebar;
-    public RandomSlang() {
+    public RandomSlangView() {
         setTitle("Slang Dictionary Search");
         initializeComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

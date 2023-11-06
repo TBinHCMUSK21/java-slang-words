@@ -10,7 +10,7 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-public class AddSlang extends JFrame {
+public class AddSlangView extends JFrame {
     private SlideBarView sidebar;
     private JTextField slangField;
 
@@ -19,7 +19,7 @@ public class AddSlang extends JFrame {
     /**
      * The main frame
      */
-    public AddSlang() {
+    public AddSlangView() {
         setTitle("Slang Dictionary Search");
         initializeComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

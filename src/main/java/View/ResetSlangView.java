@@ -1,7 +1,7 @@
 /*
- * View.DeleteSlang
+ * View.ResetSlang
  * Create by Bin
- * Date 11/6/23, 11:00 AM
+ * Date 11/6/23, 11:05 AM
  * Description:
  */
 
@@ -13,11 +13,11 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class DeleteSlang  extends JFrame{
+public class ResetSlangView extends JFrame {
     private SlideBarView sidebar;
     private DefaultListModel<String> listModel;
     private JTextField slangField;
-    public DeleteSlang() {
+    public ResetSlangView() {
         setTitle("Slang Dictionary Search");
         initializeComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,7 +44,7 @@ public class DeleteSlang  extends JFrame{
         return mainContent;
     }
     private JLabel createTitle() {
-        JLabel mainTitle = new JLabel("Delete slang word", SwingConstants.CENTER);
+        JLabel mainTitle = new JLabel("Reset Slang Words", SwingConstants.CENTER);
         mainTitle.setFont(new Font("Arial", Font.BOLD, 30));
         mainTitle.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         return mainTitle;
@@ -65,26 +65,16 @@ public class DeleteSlang  extends JFrame{
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        JLabel slangLabel = new JLabel("Slang Word:");
+        JLabel slangLabel = new JLabel("Do you want to reset the origin slang dictionary");
+        slangLabel.setHorizontalAlignment(SwingConstants.LEFT);
         slangLabel.setFont(font);
         gbc.weightx = 0.1;
         inputPanel.add(slangLabel, gbc);
 
-        slangField = new JTextField(15);
-        slangField.setFont(font);
-        gbc.weightx = 1.0;
-        inputPanel.add(slangField, gbc);
-
-
-        JButton findButton = createButton("Find", font);
+        JButton resetButton = createButton("Reset", font);
         gbc.weightx = 0.0;
 
-        inputPanel.add(findButton, gbc);
-
-        JButton deleteButton = createButton("Delete", font);
-        gbc.weightx = 0.0;
-        inputPanel.add(deleteButton, gbc);
-
+        inputPanel.add(resetButton, gbc);
 
         GridBagConstraints gbcFiller = new GridBagConstraints();
         gbcFiller.gridwidth = GridBagConstraints.REMAINDER;
@@ -139,7 +129,7 @@ public class DeleteSlang  extends JFrame{
         // Thêm bảng vào JScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
         Dimension preferredSize = scrollPane.getPreferredSize();
-        preferredSize.height = 330;
+        preferredSize.height = 400;
         scrollPane.setPreferredSize(preferredSize);
 
         // Thiết lập cửa sổ
