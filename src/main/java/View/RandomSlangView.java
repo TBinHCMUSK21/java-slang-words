@@ -2,17 +2,18 @@
  * View.RandomSlang
  * Create by Bin
  * Date 11/6/23, 12:27 PM
- * Description:
+ * Description: Random Slang View
  */
 
 package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class RandomSlangView extends JFrame{
-    private SlideBarView sidebar;
+    /**
+     * The layout of frame
+     */
     public RandomSlangView() {
         setTitle("Slang Dictionary Search");
         initializeComponents();
@@ -22,16 +23,24 @@ public class RandomSlangView extends JFrame{
         setVisible(true);
     }
 
+    /**
+     * The initial components of the layout
+     */
     private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
 
         setLayout(new BorderLayout());
-        sidebar = new SlideBarView();
+        SlideBarView sidebar = new SlideBarView();
         add(sidebar, BorderLayout.WEST);
 
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
 
+    /**
+     * The main content of the frame
+     * @param font: font for the content
+     * @return mainContent: JPanel for the main content
+     */
     private JPanel createMainContent(Font font){
         JPanel mainContent = new JPanel(new BorderLayout());
         mainContent.setBackground(Color.WHITE);
@@ -39,12 +48,23 @@ public class RandomSlangView extends JFrame{
         mainContent.add(createContentPanel(font), BorderLayout.CENTER);
         return mainContent;
     }
+
+    /**
+     * Create a title of the main content
+     * @return mainTitle: a JLabel to the title of the content
+     */
     private JLabel createTitle() {
         JLabel mainTitle = new JLabel("Random Slang Words", SwingConstants.CENTER);
         mainTitle.setFont(new Font("Arial", Font.BOLD, 30));
         mainTitle.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         return mainTitle;
     }
+
+    /**
+     * The content panel
+     * @param font: font of the content
+     * @return contentPage: JPanel for the content
+     */
     private JPanel createContentPanel(Font font) {
         JPanel contentPage = new JPanel();
         contentPage.setLayout(new GridBagLayout());
@@ -92,15 +112,17 @@ public class RandomSlangView extends JFrame{
         contentPage.add(new JPanel(), gbcFiller);
         return contentPage;
     }
-    private JButton createButton(String title, Font font, ActionListener action) {
+
+    /**
+     * A Button
+     * @param title: button title
+     * @param font: font for content
+     * @return button: JButton
+     */
+    private JButton createButton(String title, Font font) {
         JButton button = new JButton(title);
         button.setFont(font);
-        button.addActionListener(action);
         return button;
-    }
-
-    private JButton createButton(String title, Font font) {
-        return createButton(title, font, null);
     }
 
 }
