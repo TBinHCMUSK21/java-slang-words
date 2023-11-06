@@ -7,12 +7,16 @@
 
 package View;
 
+import Controller.SlideBarController;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 
 public class SlideBarView extends JPanel {
 
-    public SlideBarView() {
+    public SlideBarView(JFrame currentFrame) {
+        MouseListener action = new SlideBarController(currentFrame, this);
         /*
           Layout
          */
@@ -33,16 +37,63 @@ public class SlideBarView extends JPanel {
         /*
           Add button
          */
-        add(createMenuItem("Search by slang word", new Color(78, 115, 117)));
-        add(createMenuItem("Search by definition", new Color(78, 115, 117)));
-        add(createMenuItem("Display history search", new Color(78, 115, 117)));
-        add(createMenuItem("Add a new slang word", new Color(78, 115, 117)));
-        add(createMenuItem("Edit a slang word", new Color(78, 115, 117)));
-        add(createMenuItem("Delete a slang word", new Color(78, 115, 117)));
-        add(createMenuItem("Reset the origin slang word", new Color(78, 115, 117)));
-        add(createMenuItem("Random slang word", new Color(78, 115, 117)));
-        add(createMenuItem("Game with slang word", new Color(78, 115, 117)));
-        add(createMenuItem("Game with definitions", new Color(78, 115, 117)));
+        JPanel button;
+
+        button = createMenuItem("HomePage", new Color(78, 115, 117));
+        button.addMouseListener(action);
+        button.setName("HomePage");
+        add(button);
+
+        button = createMenuItem("Search by slang word", new Color(78, 115, 117));
+        button.addMouseListener(action);
+        button.setName("Search by slang word");
+        add(button);
+
+        button = createMenuItem("Search by definition", new Color(78, 115, 117));
+        button.addMouseListener(action);
+        button.setName("Search by definition");
+        add(button);
+
+        button = createMenuItem("Display history search", new Color(78, 115, 117));
+        button.addMouseListener(action);
+        button.setName("Display history search");
+        add(button);
+
+        button = createMenuItem("Add a new slang word", new Color(78, 115, 117));
+        button.addMouseListener(action);
+        button.setName("Add a new slang word");
+        add(button);
+
+        button = createMenuItem("Edit a slang word", new Color(78, 115, 117));
+        button.addMouseListener(action);
+        button.setName("Edit a slang word");
+        add(button);
+
+        button = createMenuItem("Delete a slang word", new Color(78, 115, 117));
+        button.addMouseListener(action);
+        button.setName("Delete a slang word");
+        add(button);
+
+        button = createMenuItem("Reset the origin slang word", new Color(78, 115, 117));
+        button.addMouseListener(action);
+        button.setName("Reset the origin slang word");
+        add(button);
+
+        button = createMenuItem("Random slang word", new Color(78, 115, 117));
+        button.addMouseListener(action);
+        button.setName("Random slang word");
+        add(button);
+
+        button = createMenuItem("Game with slang word", new Color(78, 115, 117));
+        button.addMouseListener(action);
+        button.setName("Game with slang word");
+        add(button);
+
+        button = createMenuItem("Game with definitions", new Color(78, 115, 117));
+        button.addMouseListener(action);
+        button.setName("Game with definitions");
+        add(button);
+
     }
     private JPanel createMenuItem(String text, Color hoverColor) {
         // Panel item

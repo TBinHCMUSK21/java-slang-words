@@ -33,7 +33,7 @@ public class EditSlangView extends JFrame {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
 
         setLayout(new BorderLayout());
-        SlideBarView sidebar = new SlideBarView();
+        SlideBarView sidebar = new SlideBarView(this);
         add(sidebar, BorderLayout.WEST);
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }

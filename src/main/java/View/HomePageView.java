@@ -18,7 +18,7 @@ public class HomePageView extends JFrame {
 
         // The sidebar
         setLayout(new BorderLayout());
-        SlideBarView sidebar = new SlideBarView();
+        SlideBarView sidebar = new SlideBarView(this);
         add(sidebar, BorderLayout.WEST);
 
         // The main content
@@ -84,5 +84,6 @@ public class HomePageView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 }

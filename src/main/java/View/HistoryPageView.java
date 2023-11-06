@@ -30,7 +30,7 @@ public class HistoryPageView extends JFrame {
      */
     private void initializeComponents() {
         setLayout(new BorderLayout());
-        SlideBarView sidebar = new SlideBarView();
+        SlideBarView sidebar = new SlideBarView(this);
         add(sidebar, BorderLayout.WEST);
         add(createMainContent(), BorderLayout.CENTER);
     }
