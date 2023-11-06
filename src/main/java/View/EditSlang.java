@@ -76,10 +76,10 @@ public class EditSlang extends JFrame {
         inputPanel.add(slangField, gbc);
 
 
-        JButton addButton = createButton("Find", font);
+        JButton findButton = createButton("Find", font);
         gbc.weightx = 0.0;
 
-        inputPanel.add(addButton, gbc);
+        inputPanel.add(findButton, gbc);
 
 
         GridBagConstraints gbcFiller = new GridBagConstraints();
