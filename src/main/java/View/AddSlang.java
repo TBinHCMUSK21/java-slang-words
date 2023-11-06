@@ -2,14 +2,13 @@
  * View.AddSlang
  * Create by Bin
  * Date 11/6/23, 9:55 AM
- * Description:
+ * Description: The AddSlang Page
  */
 
 package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class AddSlang extends JFrame {
     private SlideBarView sidebar;

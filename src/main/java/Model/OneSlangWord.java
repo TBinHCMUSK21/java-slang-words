@@ -32,19 +32,33 @@ public class OneSlangWord {
         this.definitions=definitions;
     }
 
-
+    /**
+     * Getter of the class OneSlangWord
+     * @return slang: slang word
+     */
     public String getSlang() {
         return slang;
     }
 
+    /**
+     * Setter of the class OneSlangWord
+     * @param slang: slang word
+     */
     public void setSlang(String slang) {
         this.slang = slang;
     }
 
+    /**
+     * Getter of the class OneSlangWord
+     * @return definition: list of definition
+     */
     public LinkedHashSet<String> getDefinitions() {
         return definitions;
     }
-
+    /**
+     * Setter of the class OneSlangWord
+     * @param definitions: list of definition
+     */
     public void setDefinitions(LinkedHashSet<String> definitions) {
         this.definitions = definitions;
     }
