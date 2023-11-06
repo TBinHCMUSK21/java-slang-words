@@ -2,7 +2,7 @@
  * View.test
  * Create by Bin
  * Date 11/6/23, 9:31 AM
- * Description:
+ * Description: Search Definition View
  */
 
 package View;
@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class SearchDefinitionView extends JFrame {
-    private SlideBarView sidebar;
     private DefaultListModel<String> listModel;
     private JTextField searchField;
 
@@ -29,7 +28,7 @@ public class SearchDefinitionView extends JFrame {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
 
         setLayout(new BorderLayout());
-        sidebar = new SlideBarView();
+        SlideBarView sidebar = new SlideBarView();
         add(sidebar, BorderLayout.WEST);
 
         add(createMainContent(mainFont), BorderLayout.CENTER);
