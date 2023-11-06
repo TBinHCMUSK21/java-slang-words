@@ -11,18 +11,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SlideBarView extends JPanel {
-    private JPanel sidebarPanel;
 
     public SlideBarView() {
-        /**
-         * Tạo layout
+        /*
+          Layout
          */
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(new Color(56, 55, 55));
         setPreferredSize(new Dimension(200, getHeight()));
 
-        /**
-         * Thêm tiêu đề cho thanh bên trái
+        /*
+          Title
          */
         JLabel title = new JLabel("Slang Dictionary", SwingConstants.CENTER);
         title.setForeground(Color.WHITE);
@@ -31,8 +30,8 @@ public class SlideBarView extends JPanel {
         title.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(title);
 
-        /**
-         * Thêm từng nút bấm vòa thanh bên trái
+        /*
+          Add button
          */
         add(createMenuItem("Search by slang word", new Color(78, 115, 117)));
         add(createMenuItem("Search by definition", new Color(78, 115, 117)));
@@ -46,20 +45,20 @@ public class SlideBarView extends JPanel {
         add(createMenuItem("Game with definitions", new Color(78, 115, 117)));
     }
     private JPanel createMenuItem(String text, Color hoverColor) {
-        // Tạo JPanel tùy chỉnh cho menu item
+        // Panel item
         JPanel menuItem = new JPanel(new BorderLayout());
-        menuItem.setBackground(new Color(59, 57, 57)); // Màu nền
-        menuItem.setPreferredSize(new Dimension(200, 50)); // Kích thước
+        menuItem.setBackground(new Color(59, 57, 57));
+        menuItem.setPreferredSize(new Dimension(200, 50));
 
-        // Label cho text
+        // Label for text
         JLabel label = new JLabel(text);
         label.setForeground(Color.WHITE); // Màu chữ
         label.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // Thêm label vào menuItem
+        // Add Label
         menuItem.add(label, BorderLayout.CENTER);
 
-        // Event để thay đổi màu khi hover
+        // Event when hover
         menuItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menuItem.setBackground(hoverColor);
@@ -69,8 +68,5 @@ public class SlideBarView extends JPanel {
             }
         });
         return menuItem;
-    }
-    public JPanel getSidebarPanel() {
-        return sidebarPanel;
     }
 }
