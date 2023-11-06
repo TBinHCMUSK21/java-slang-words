@@ -2,7 +2,7 @@
  * View.SlideBarView
  * Create by Bin
  * Date 11/6/23, 2:39 AM
- * Description:
+ * Description: Sidebar view
  */
 
 package View;

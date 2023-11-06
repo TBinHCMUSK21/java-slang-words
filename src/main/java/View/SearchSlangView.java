@@ -2,7 +2,7 @@
  * View.test
  * Create by Bin
  * Date 11/6/23, 9:31 AM
- * Description:
+ * Description: Search Slang View
  */
 
 package View;
