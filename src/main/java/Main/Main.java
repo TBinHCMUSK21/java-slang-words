@@ -15,6 +15,6 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
 
-        SwingUtilities.invokeLater(() -> new HomePageView().setVisible(true));
+        SwingUtilities.invokeLater(() -> new QuizDefinitionView().setVisible(true));
     }
 }
