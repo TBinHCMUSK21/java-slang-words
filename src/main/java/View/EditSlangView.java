@@ -2,7 +2,7 @@
  * View.EditSlang
  * Create by Bin
  * Date 11/6/23, 10:27 AM
- * Description:
+ * Description: The edit slang words view
  */
 
 package View;
