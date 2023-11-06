@@ -2,7 +2,7 @@
  * View.ResetSlang
  * Create by Bin
  * Date 11/6/23, 11:05 AM
- * Description:
+ * Description: Reset View
  */
 
 package View;
@@ -11,12 +11,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class ResetSlangView extends JFrame {
-    private SlideBarView sidebar;
-    private DefaultListModel<String> listModel;
-    private JTextField slangField;
     public ResetSlangView() {
         setTitle("Slang Dictionary Search");
         initializeComponents();
@@ -30,7 +26,7 @@ public class ResetSlangView extends JFrame {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
 
         setLayout(new BorderLayout());
-        sidebar = new SlideBarView();
+        SlideBarView sidebar = new SlideBarView();
         add(sidebar, BorderLayout.WEST);
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
@@ -85,15 +81,11 @@ public class ResetSlangView extends JFrame {
 
         return inputPanel;
     }
-    private JButton createButton(String title, Font font, ActionListener action) {
-        JButton button = new JButton(title);
-        button.setFont(font);
-        button.addActionListener(action);
-        return button;
-    }
 
     private JButton createButton(String title, Font font) {
-        return createButton(title, font, null);
+        JButton button = new JButton(title);
+        button.setFont(font);
+        return button;
     }
     private JPanel createSearchPanel() {
         JPanel searchPanel = new JPanel();
@@ -104,35 +96,35 @@ public class ResetSlangView extends JFrame {
     private JScrollPane createListScroller() {
         DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {
             public boolean isCellEditable(int row, int column) {
-                // Không cho phép chỉnh sửa bất kỳ ô nào
+                // Not allow to edit
                 return false;
             }
         };
 
-        // Tạo bảng với model đã tạo
+        // Create a table
         Font tableFont = new Font("Arial", Font.PLAIN, 16);
         JTable table = new JTable(tableModel);
         table.setFont(tableFont);
         JTableHeader header = table.getTableHeader();
         header.setFont(tableFont);
 
-        // Thêm dữ liệu vào bảng
+        // Add data to table
         tableModel.addRow(new Object[]{1, "Slang 1", "Meaning 1"});
         tableModel.addRow(new Object[]{2, "Slang 2", "Meaning 2"});
         tableModel.addRow(new Object[]{3, "Slang 3", "Meaning 3"});
 
 
-        // Đặt các thuộc tính khác cho bảng nếu cần
+        // Attribute for table
         table.setFillsViewportHeight(false);
         table.setRowHeight(30);
 
-        // Thêm bảng vào JScrollPane
+        // Add table to JScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
         Dimension preferredSize = scrollPane.getPreferredSize();
         preferredSize.height = 400;
         scrollPane.setPreferredSize(preferredSize);
 
-        // Thiết lập cửa sổ
+        // Display
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
