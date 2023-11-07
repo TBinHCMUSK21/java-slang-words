@@ -7,6 +7,8 @@
 
 package Model;
 
+import Main.Main;
+
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -55,5 +57,9 @@ public class ListSlangWord {
             builder.append(slang.toString());
         }
         return builder.toString();
+    }
+
+    public LinkedHashSet<String> searchBySlang(String slang) {
+        return Main.listSlangWord.getListSlangWord().get(slang);
     }
 }
