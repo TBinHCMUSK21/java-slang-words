@@ -22,6 +22,13 @@ public class ListSlangWord {
     }
 
     /**
+     * Constructor with parameter
+     */
+    public ListSlangWord(HashMap<String, LinkedHashSet<String>> listSlangWord){
+        super();
+        this.listSlangWord = listSlangWord;
+    }
+    /**
      * Getter list of slang words
      * @return listSlangWord: list of slang words
      */
