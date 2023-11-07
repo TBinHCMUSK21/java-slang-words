@@ -7,12 +7,21 @@
 
 package View;
 
+import Controller.ResetSlangController;
+import Main.Main;
+import Model.OneSlangWord;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.util.LinkedHashSet;
+import java.util.Map;
+
+import static Main.Main.*;
 
 public class ResetSlangView extends JFrame {
+    public DefaultTableModel tableModel;
     public ResetSlangView() {
         setTitle("Slang Dictionary Search");
         initializeComponents();
@@ -52,6 +61,7 @@ public class ResetSlangView extends JFrame {
         return searchPanel;
     }
     private JPanel createInputPanel(Font font) {
+        ResetSlangController action = new ResetSlangController(this);
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridBagLayout());
         inputPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
@@ -68,6 +78,7 @@ public class ResetSlangView extends JFrame {
         inputPanel.add(slangLabel, gbc);
 
         JButton resetButton = createButton("Reset", font);
+        resetButton.addActionListener(action);
         gbc.weightx = 0.0;
 
         inputPanel.add(resetButton, gbc);
@@ -94,7 +105,7 @@ public class ResetSlangView extends JFrame {
         return searchPanel;
     }
     private JScrollPane createListScroller() {
-        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {
+        tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {
             public boolean isCellEditable(int row, int column) {
                 // Not allow to edit
                 return false;
@@ -109,10 +120,13 @@ public class ResetSlangView extends JFrame {
         header.setFont(tableFont);
 
         // Add data to table
-        tableModel.addRow(new Object[]{1, "Slang 1", "Meaning 1"});
-        tableModel.addRow(new Object[]{2, "Slang 2", "Meaning 2"});
-        tableModel.addRow(new Object[]{3, "Slang 3", "Meaning 3"});
-
+        int count = 1;
+        for (Map.Entry<String, LinkedHashSet<String>> entry : listSlangWord.getListSlangWord().entrySet()) {
+            String key = entry.getKey();
+            LinkedHashSet<String> value = entry.getValue();
+            tableModel.addRow(new Object[]{count,key,value});
+            count++;
+        }
 
         // Attribute for table
         table.setFillsViewportHeight(false);
@@ -130,5 +144,17 @@ public class ResetSlangView extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         return scrollPane;
+    }
+
+    public void resetTheOrigin() {
+        Main.listSlangWord.copy(originSlangWord);
+        tableModel.setRowCount(0);
+        int count = 1;
+        for (Map.Entry<String, LinkedHashSet<String>> entry : listSlangWord.getListSlangWord().entrySet()) {
+            String key = entry.getKey();
+            LinkedHashSet<String> value = entry.getValue();
+            tableModel.addRow(new Object[]{count,key,value});
+            count++;
+        }
     }
 }

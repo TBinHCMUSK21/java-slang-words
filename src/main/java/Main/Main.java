@@ -29,4 +29,5 @@ public class Main {
         SwingUtilities.invokeLater(() -> new HomePageView().setVisible(true));
     }
 
+
 }

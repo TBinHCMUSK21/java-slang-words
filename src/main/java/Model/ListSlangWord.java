@@ -59,7 +59,14 @@ public class ListSlangWord {
         }
         return builder.toString();
     }
-
+    public ListSlangWord copy(ListSlangWord listSlangWord){
+        for (Map.Entry<String, LinkedHashSet<String>> entry : listSlangWord.getListSlangWord().entrySet()) {
+            String key = entry.getKey();
+            LinkedHashSet<String> value = entry.getValue();
+            this.listSlangWord.put(key,value);
+        }
+        return this;
+    }
     public LinkedHashSet<String> searchBySlang(String slang) {
         return this.listSlangWord.get(slang);
     }
@@ -78,5 +85,6 @@ public class ListSlangWord {
         }
         return result;
     }
+
 
 }
