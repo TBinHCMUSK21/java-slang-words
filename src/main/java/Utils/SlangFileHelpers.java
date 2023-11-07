@@ -7,9 +7,8 @@
 
 package Utils;
 import Model.ListSlangWord;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.*;
 
 public class SlangFileHelpers implements FileHelpers<ListSlangWord> {
@@ -49,6 +48,7 @@ public class SlangFileHelpers implements FileHelpers<ListSlangWord> {
                         (Arrays.asList(splitWord[1].split("\\|")));
                 data.put(splitWord[0],definitions);
             }
+            fin.close();
         }
         catch (IOException e) {
             System.err.println("An IOException was caught: " + e.getMessage());
@@ -57,11 +57,16 @@ public class SlangFileHelpers implements FileHelpers<ListSlangWord> {
         return new ListSlangWord(data);
     }
     @Override
-    public void writeLines(ListSlangWord contents) throws IOException {
-
+    public void writeLines(ListSlangWord listSlangWord) throws IOException {
+        BufferedWriter fout = new BufferedWriter(new FileWriter(path));
+        fout.write("Slang`Definitions\n");
+        fout.write(listSlangWord.toString());
+        fout.close();
     }
     @Override
-    public void appendLine(ListSlangWord line) throws IOException {
-
+    public void appendLine(ListSlangWord listSlangWord) throws IOException {
+        BufferedWriter fout = new BufferedWriter(new FileWriter(path,true));
+        fout.write(listSlangWord.toString());
+        fout.close();
     }
 }

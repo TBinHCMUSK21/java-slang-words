@@ -9,6 +9,7 @@ package Model;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 
 public class ListSlangWord {
     private HashMap<String, LinkedHashSet<String>> listSlangWord;
@@ -47,10 +48,12 @@ public class ListSlangWord {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        this.listSlangWord.forEach((key, value) -> {
+        for (Map.Entry<String, LinkedHashSet<String>> entry : this.listSlangWord.entrySet()) {
+            String key = entry.getKey();
+            LinkedHashSet<String> value = entry.getValue();
             OneSlangWord slang = new OneSlangWord(key,value);
             builder.append(slang.toString());
-        });
+        }
         return builder.toString();
     }
 }

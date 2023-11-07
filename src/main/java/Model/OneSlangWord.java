@@ -27,7 +27,6 @@ public class OneSlangWord {
      * @param definitions: list of definitions
      */
     public OneSlangWord(String slang, LinkedHashSet<String> definitions){
-        super();
         this.slang=slang;
         this.definitions=definitions;
     }
@@ -70,7 +69,8 @@ public class OneSlangWord {
         builder.append("`");
         for (String string:this.definitions){
             if (!string.equals(this.definitions.getLast())){
-                builder.append(string).append("|");
+                builder.append(string);
+                builder.append("|");
             }
             else builder.append(string);
         }
