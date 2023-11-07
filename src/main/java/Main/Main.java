@@ -20,7 +20,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         SlangFileHelpers fileHelper = new SlangFileHelpers("slang.txt");
         ListSlangWord listSlangWord = fileHelper.readAllLines();
-        System.out.println(listSlangWord.getListSlangWord().size());
+        System.out.println(listSlangWord.toString());
+
         /*
         SwingUtilities.invokeLater(() -> new HomePageView().setVisible(true));
         */

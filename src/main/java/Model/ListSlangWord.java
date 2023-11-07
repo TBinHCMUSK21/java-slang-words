@@ -43,4 +43,14 @@ public class ListSlangWord {
     public void setListSlang(HashMap<String, LinkedHashSet<String>> listSlangWord) {
         this.listSlangWord = listSlangWord;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        this.listSlangWord.forEach((key, value) -> {
+            OneSlangWord slang = new OneSlangWord(key,value);
+            builder.append(slang.toString());
+        });
+        return builder.toString();
+    }
 }

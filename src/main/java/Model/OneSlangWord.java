@@ -62,4 +62,19 @@ public class OneSlangWord {
     public void setDefinitions(LinkedHashSet<String> definitions) {
         this.definitions = definitions;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(this.slang);
+        builder.append("`");
+        for (String string:this.definitions){
+            if (!string.equals(this.definitions.getLast())){
+                builder.append(string).append("|");
+            }
+            else builder.append(string);
+        }
+        builder.append("\n");
+        return builder.toString();
+    }
 }
