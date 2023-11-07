@@ -26,7 +26,7 @@ public class SearchSlangView extends JFrame {
         setTitle("Slang Dictionary Search");
         initializeComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(900, 675);
         setLocationRelativeTo(null);
         setVisible(true);
     }

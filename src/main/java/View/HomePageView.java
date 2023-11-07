@@ -82,7 +82,7 @@ public class HomePageView extends JFrame {
 
         // Display
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(900, 675);
         setLocationRelativeTo(null);
         setVisible(true);
     }
