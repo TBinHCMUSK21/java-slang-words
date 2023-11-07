@@ -7,10 +7,15 @@
 
 package View;
 
+import Main.Main;
+import Model.OneSlangWord;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.util.LinkedHashSet;
+import java.util.Map;
 
 public class HistoryPageView extends JFrame {
     /**
@@ -92,10 +97,22 @@ public class HistoryPageView extends JFrame {
         header.setFont(tableFont);
 
         // Add data to table
-        tableModel.addRow(new Object[]{1, "Slang 1", "Meaning 1"});
-        tableModel.addRow(new Object[]{2, "Slang 2", "Meaning 2"});
-        tableModel.addRow(new Object[]{3, "Slang 3", "Meaning 3"});
+        int count = 1;
+        for (Map.Entry<String, LinkedHashSet<String>> entry : Main.historySlangWord.getListSlangWord().entrySet()) {
+            String key = entry.getKey();
+            LinkedHashSet<String> value = entry.getValue();
+            if (key==null){
+                key="Not found";
+            }
+            if (value==null){
+                tableModel.addRow(new Object[]{count,key,"Not Found"});
+            }
+            else{
+                tableModel.addRow(new Object[]{count,key,value});
+            }
 
+            count++;
+        }
 
         // Feature for table
         table.setFillsViewportHeight(false);

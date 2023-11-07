@@ -63,8 +63,8 @@ public class ListSlangWord {
     public LinkedHashSet<String> searchBySlang(String slang) {
         return this.listSlangWord.get(slang);
     }
-    public LinkedHashSet<OneSlangWord> searchByDefinition (String definition) {
-        LinkedHashSet<OneSlangWord> result = new LinkedHashSet<>();
+    public LinkedHashSet<String> searchByDefinition (String definition) {
+        LinkedHashSet<String> result = new LinkedHashSet<>();
         for (Map.Entry<String, LinkedHashSet<String>> entry : this.listSlangWord.entrySet()) {
             String key = entry.getKey();
             LinkedHashSet<String> value = entry.getValue();
@@ -72,7 +72,7 @@ public class ListSlangWord {
                 string = string.toLowerCase();
                 definition=definition.toLowerCase();
                 if (string.contains(definition)){
-                    result.add(new OneSlangWord(key,new LinkedHashSet<>(Arrays.asList(string))));
+                    result.add(key);
                 }
             }
         }

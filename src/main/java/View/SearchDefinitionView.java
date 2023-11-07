@@ -11,6 +11,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 
 import Controller.SearchDefinitionController;
@@ -98,7 +99,10 @@ public class SearchDefinitionView extends JFrame {
     }
 
     private JScrollPane createListScroller(Font font) {
-        listModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {};
+        listModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) { public boolean isCellEditable(int row, int column) {
+            // Not edit the table
+            return false;
+        }};
         // Create Table
         Font tableFont = new Font("Arial", Font.PLAIN, 16);
         JTable table = new JTable(listModel);
@@ -131,15 +135,18 @@ public class SearchDefinitionView extends JFrame {
     public void searchDefinition() {
         listModel.setRowCount(0);
         String definition = searchField.getText();
-        LinkedHashSet<OneSlangWord> result = Main.listSlangWord.searchByDefinition(definition);
+        LinkedHashSet<String> result = Main.listSlangWord.searchByDefinition(definition);
         if (!result.isEmpty()){
             int count = 1;
-            for (OneSlangWord item:result){
-                listModel.addRow(new Object[]{count,item.getSlang(),item.getDefinitions().getFirst()});
+            for (String item:result){
+                listModel.addRow(new Object[]{count,item,Main.listSlangWord.getListSlangWord().get(item)});
+                Main.historySlangWord.getListSlangWord().put(item,Main.listSlangWord.getListSlangWord().get(item));
                 count = count + 1;
             }
+
         }
         else{
+            Main.historySlangWord.getListSlangWord().put(null,new LinkedHashSet<>(Arrays.asList(definition)));
             JOptionPane.showMessageDialog(this,"Not Found");
         }
     }

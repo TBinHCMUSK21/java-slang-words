@@ -92,7 +92,12 @@ public class SearchSlangView extends JFrame {
         return  button;
     }
     private JScrollPane createListScroller(Font font) {
-        listModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {};
+        listModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {
+            public boolean isCellEditable(int row, int column) {
+                // Not edit the table
+                return false;
+            }
+        };
         // Create Table
         Font tableFont = new Font("Arial", Font.PLAIN, 16);
         JTable table = new JTable(listModel);
@@ -132,8 +137,10 @@ public class SearchSlangView extends JFrame {
                listModel.addRow(new Object[]{count,slang,string});
                count = count + 1;
            }
+           Main.historySlangWord.getListSlangWord().put(slang,definition);
         }
         else{
+            Main.historySlangWord.getListSlangWord().put(slang,null);
             JOptionPane.showMessageDialog(this,"Not Found");
         }
     }
