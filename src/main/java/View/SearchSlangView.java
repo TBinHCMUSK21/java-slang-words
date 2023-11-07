@@ -10,13 +10,15 @@ import Controller.SearchSlangController;
 import Main.Main;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.LinkedHashSet;
 
 
 public class SearchSlangView extends JFrame {
 
-    public DefaultListModel<String> listModel;
+    public DefaultTableModel listModel;
     public JTextField searchField;
 
 
@@ -90,32 +92,53 @@ public class SearchSlangView extends JFrame {
         return  button;
     }
     private JScrollPane createListScroller(Font font) {
-        listModel = new DefaultListModel<>();
-        JList<String> wordList = new JList<>(listModel);
-        wordList.setFont(font);
-        wordList.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        listModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {};
+        // Create Table
+        Font tableFont = new Font("Arial", Font.PLAIN, 16);
+        JTable table = new JTable(listModel);
+        table.setFont(tableFont);
+        JTableHeader header = table.getTableHeader();
+        header.setFont(tableFont);
 
-        JScrollPane listScroller = new JScrollPane(wordList);
-        listScroller.setPreferredSize(new Dimension(500, 500));
-        listScroller.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        return listScroller;
+        // Add data to table
+        listModel.setRowCount(0);
+
+
+        // Feature for table
+        table.setFillsViewportHeight(false);
+        table.setRowHeight(30);
+
+        // Add table to JScrollPane
+        JScrollPane scrollPane = new JScrollPane(table);
+        Dimension preferredSize = scrollPane.getPreferredSize();
+        preferredSize.height = 370;
+        scrollPane.setPreferredSize(preferredSize);
+
+        // Display window
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        return scrollPane;
     }
 
     public void findSlang() {
-        listModel.removeAllElements();
+        listModel.setRowCount(0);
         String slang = searchField.getText();
         if (Main.listSlangWord.getListSlangWord().get(slang)!=null){
            LinkedHashSet<String> definition = Main.listSlangWord.searchBySlang(slang);
+           int count = 1;
            for (String string:definition){
-               listModel.addElement(string);
+               listModel.addRow(new Object[]{count,slang,string});
+               count = count + 1;
            }
         }
         else{
-            listModel.addElement("Not Found");
+            JOptionPane.showMessageDialog(this,"Not Found");
         }
     }
     public void clearAll() {
-        listModel.removeAllElements();
+        listModel.setRowCount(0);
         searchField.setText("");
     }
 }

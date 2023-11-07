@@ -8,12 +8,19 @@
 package View;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.util.LinkedHashSet;
+
+import Controller.SearchDefinitionController;
+import Main.*;
+import Model.OneSlangWord;
+
 
 public class SearchDefinitionView extends JFrame {
-    private DefaultListModel<String> listModel;
-    private JTextField searchField;
+    public DefaultTableModel listModel;
+    public JTextField searchField;
 
     public SearchDefinitionView() {
         setTitle("Slang Dictionary Search");
@@ -23,7 +30,6 @@ public class SearchDefinitionView extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
     private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
 
@@ -61,6 +67,7 @@ public class SearchDefinitionView extends JFrame {
     }
 
     private JPanel createInputPanel(Font font) {
+        SearchDefinitionController action = new SearchDefinitionController(this);
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -71,7 +78,9 @@ public class SearchDefinitionView extends JFrame {
         contentTitle.setFont(font);
 
         JButton findButton = createButton("Find", font);
-        JButton clearButton = createButton("Clear", font, e -> clearSearch());
+        findButton.addActionListener(action);
+        JButton clearButton = createButton("Clear",font);
+        clearButton.addActionListener(action);
 
         inputPanel.add(contentTitle);
         inputPanel.add(searchField);
@@ -81,32 +90,62 @@ public class SearchDefinitionView extends JFrame {
         return inputPanel;
     }
 
-    private JButton createButton(String title, Font font, ActionListener action) {
+    private JButton createButton(String title, Font font) {
+
         JButton button = new JButton(title);
         button.setFont(font);
-        button.addActionListener(action);
         return button;
     }
 
-    private JButton createButton(String title, Font font) {
-        return createButton(title, font, null);
-    }
-
-    private void clearSearch() {
-        searchField.setText("");
-        listModel.clear();
-    }
-
     private JScrollPane createListScroller(Font font) {
-        listModel = new DefaultListModel<>();
-        JList<String> wordList = new JList<>(listModel);
-        wordList.setFont(font);
-        wordList.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        listModel.addElement("Search definition"); // Example element
+        listModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {};
+        // Create Table
+        Font tableFont = new Font("Arial", Font.PLAIN, 16);
+        JTable table = new JTable(listModel);
+        table.setFont(tableFont);
+        JTableHeader header = table.getTableHeader();
+        header.setFont(tableFont);
 
-        JScrollPane listScroller = new JScrollPane(wordList);
-        listScroller.setPreferredSize(new Dimension(500, 500));
-        listScroller.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        return listScroller;
+        // Add data to table
+        listModel.setRowCount(0);
+
+
+        // Feature for table
+        table.setFillsViewportHeight(false);
+        table.setRowHeight(30);
+
+        // Add table to JScrollPane
+        JScrollPane scrollPane = new JScrollPane(table);
+        Dimension preferredSize = scrollPane.getPreferredSize();
+        preferredSize.height = 370;
+        scrollPane.setPreferredSize(preferredSize);
+
+        // Display window
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        return scrollPane;
+    }
+
+    public void searchDefinition() {
+        listModel.setRowCount(0);
+        String definition = searchField.getText();
+        LinkedHashSet<OneSlangWord> result = Main.listSlangWord.searchByDefinition(definition);
+        if (!result.isEmpty()){
+            int count = 1;
+            for (OneSlangWord item:result){
+                listModel.addRow(new Object[]{count,item.getSlang(),item.getDefinitions().getFirst()});
+                count = count + 1;
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Not Found");
+        }
+    }
+
+    public void clearAll() {
+        listModel.setRowCount(0);
+        searchField.setText("");
     }
 }
