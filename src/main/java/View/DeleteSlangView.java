@@ -7,13 +7,19 @@
 
 package View;
 
+import Controller.DeleteSlangController;
+import Main.Main;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.util.LinkedHashSet;
 
 public class DeleteSlangView extends JFrame{
 
+    public JTextField slangField;
+    public DefaultTableModel tableModel;
     /**
      * The main frame layout
      */
@@ -82,6 +88,8 @@ public class DeleteSlangView extends JFrame{
      * @return inputPanel: the panel to input text to delete
      */
     private JPanel createInputPanel(Font font) {
+        DeleteSlangController action = new DeleteSlangController(this);
+
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridBagLayout());
         inputPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
@@ -98,7 +106,7 @@ public class DeleteSlangView extends JFrame{
         inputPanel.add(slangLabel, gbc);
 
         // Panel to input
-        JTextField slangField = new JTextField(15);
+        slangField = new JTextField(15);
         slangField.setFont(font);
         gbc.weightx = 1.0;
         inputPanel.add(slangField, gbc);
@@ -106,6 +114,8 @@ public class DeleteSlangView extends JFrame{
         // Button to find the definition of the slang
         JButton findButton = createButton("Find", font);
         gbc.weightx = 0.0;
+        findButton.setText("Find");
+        findButton.addActionListener(action);
 
         inputPanel.add(findButton, gbc);
 
@@ -113,6 +123,8 @@ public class DeleteSlangView extends JFrame{
         JButton deleteButton = createButton("Delete", font);
         gbc.weightx = 0.0;
         inputPanel.add(deleteButton, gbc);
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(action);
 
         // Deal with the space empty
         GridBagConstraints gbcFiller = new GridBagConstraints();
@@ -153,7 +165,7 @@ public class DeleteSlangView extends JFrame{
      * @return JScrollPane: a table of all definition
      */
     private JScrollPane createListScroller() {
-        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {
+        tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {
             public boolean isCellEditable(int row, int column) {
                 // Not edit the table
                 return false;
@@ -168,9 +180,7 @@ public class DeleteSlangView extends JFrame{
         header.setFont(tableFont);
 
         // Add the value to the table
-        tableModel.addRow(new Object[]{1, "Slang 1", "Meaning 1"});
-        tableModel.addRow(new Object[]{2, "Slang 2", "Meaning 2"});
-        tableModel.addRow(new Object[]{3, "Slang 3", "Meaning 3"});
+
 
 
         // Edit the feature of table
@@ -189,5 +199,51 @@ public class DeleteSlangView extends JFrame{
         setLocationRelativeTo(null);
         setVisible(true);
         return scrollPane;
+    }
+
+    public void findSlang() {
+        String slang = slangField.getText();
+        tableModel.setRowCount(0);
+        if (Main.listSlangWord.getListSlangWord().get(slang)!=null){
+            LinkedHashSet<String> definition = Main.listSlangWord.searchBySlang(slang);
+            int count = 1;
+            for (String string:definition){
+                tableModel.addRow(new Object[]{count,slang,string});
+                count = count + 1;
+            }
+            Main.historySlangWord.getListSlangWord().put(slang,definition);
+        }
+        else{
+            Main.historySlangWord.getListSlangWord().put(slang,null);
+            JOptionPane.showMessageDialog(this,"Not Found");
+        }
+    }
+
+    public void deleteSlang(){
+        String slang = slangField.getText();
+        if (Main.listSlangWord.getListSlangWord().get(slang)!=null){
+            Object[] options = {"Yes", "No"};
+            int result = JOptionPane.showOptionDialog(this,
+                    "Are you sure to delete words?",
+                    "Slang Delete",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[1]);
+            if (result==0){
+                Main.listSlangWord.deleteSlang(slang);
+                this.slangField.setText("");
+                this.tableModel.setRowCount(0);
+                JOptionPane.showMessageDialog(this,"Success!!!");
+            }
+            if (result==1){
+                JOptionPane.showMessageDialog(this,"Cancel!!!");
+            }
+
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Not Found");
+        }
     }
 }

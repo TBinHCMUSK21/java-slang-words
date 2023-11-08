@@ -94,4 +94,8 @@ public class ListSlangWord {
         this.listSlangWord.get(slang).remove(prev_definition);
         this.listSlangWord.get(slang).add(new_definition);
     }
+
+    public void deleteSlang(String slang) {
+        this.listSlangWord.remove(slang);
+    }
 }
