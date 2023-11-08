@@ -9,9 +9,7 @@ package Model;
 
 import Main.Main;
 
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
+import java.util.*;
 
 public class ListSlangWord {
     private HashMap<String, LinkedHashSet<String>> listSlangWord;
@@ -97,5 +95,13 @@ public class ListSlangWord {
 
     public void deleteSlang(String slang) {
         this.listSlangWord.remove(slang);
+    }
+
+    public OneSlangWord randomOneSlang() {
+        ArrayList<String> keys = new ArrayList<>(this.listSlangWord.keySet());
+        Random random = new Random();
+        String randomKey = keys.get(random.nextInt(keys.size()));
+        LinkedHashSet<String> definition = this.listSlangWord.get(randomKey);
+        return new OneSlangWord(randomKey,definition);
     }
 }
