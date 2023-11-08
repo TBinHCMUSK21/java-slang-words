@@ -99,6 +99,7 @@ public class EditSlangView extends JFrame {
      */
     private JPanel createInputPanel(Font font) {
         EditSlangController action = new EditSlangController(this);
+
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridBagLayout());
         inputPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
@@ -126,17 +127,7 @@ public class EditSlangView extends JFrame {
         gbc.weightx = 0.0;
         findButton.setText("Find");
         findButton.addActionListener(action);
-
         inputPanel.add(findButton, gbc);
-
-        // Deal with the space empty
-        GridBagConstraints gbcFiller = new GridBagConstraints();
-        gbcFiller.gridwidth = GridBagConstraints.REMAINDER;
-        gbcFiller.fill = GridBagConstraints.BOTH;
-        gbcFiller.weightx = 1;
-        gbcFiller.weighty = 50;
-        inputPanel.add(new JPanel(), gbcFiller);
-
         return inputPanel;
     }
 
@@ -189,9 +180,6 @@ public class EditSlangView extends JFrame {
 
         // Add table to JScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
-        Dimension preferredSize = scrollPane.getPreferredSize();
-        preferredSize.height = 370;
-        scrollPane.setPreferredSize(preferredSize);
 
         // Display window
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

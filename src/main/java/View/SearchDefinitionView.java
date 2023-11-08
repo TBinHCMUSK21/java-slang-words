@@ -122,9 +122,6 @@ public class SearchDefinitionView extends JFrame {
 
         // Add table to JScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
-        Dimension preferredSize = scrollPane.getPreferredSize();
-        preferredSize.height = 370;
-        scrollPane.setPreferredSize(preferredSize);
 
         // Display window
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

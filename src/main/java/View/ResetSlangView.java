@@ -43,7 +43,7 @@ public class ResetSlangView extends JFrame {
         JPanel mainContent = new JPanel(new BorderLayout());
         mainContent.setBackground(Color.WHITE);
         mainContent.add(createTitle(), BorderLayout.NORTH);
-        mainContent.add(createAddPanel(font), BorderLayout.CENTER);
+        mainContent.add(createResetPanel(font), BorderLayout.CENTER);
         mainContent.add(createSearchPanel(), BorderLayout.SOUTH);
 
         return mainContent;
@@ -54,7 +54,7 @@ public class ResetSlangView extends JFrame {
         mainTitle.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         return mainTitle;
     }
-    private JPanel createAddPanel(Font font) {
+    private JPanel createResetPanel(Font font) {
         JPanel searchPanel = new JPanel();
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.PAGE_AXIS));
         searchPanel.add(createInputPanel(font), BorderLayout.NORTH);
@@ -82,13 +82,6 @@ public class ResetSlangView extends JFrame {
         gbc.weightx = 0.0;
 
         inputPanel.add(resetButton, gbc);
-
-        GridBagConstraints gbcFiller = new GridBagConstraints();
-        gbcFiller.gridwidth = GridBagConstraints.REMAINDER;
-        gbcFiller.fill = GridBagConstraints.BOTH;
-        gbcFiller.weightx = 1;
-        gbcFiller.weighty = 50;
-        inputPanel.add(new JPanel(), gbcFiller);
 
         return inputPanel;
     }
@@ -134,9 +127,6 @@ public class ResetSlangView extends JFrame {
 
         // Add table to JScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
-        Dimension preferredSize = scrollPane.getPreferredSize();
-        preferredSize.height = 400;
-        scrollPane.setPreferredSize(preferredSize);
 
         // Display
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

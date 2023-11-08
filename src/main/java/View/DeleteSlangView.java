@@ -99,40 +99,43 @@ public class DeleteSlangView extends JFrame{
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(5, 5, 5, 5);
 
+
         // Title
+        gbc.gridy = 1;
         JLabel slangLabel = new JLabel("Slang Word:");
         slangLabel.setFont(font);
         gbc.weightx = 0.1;
         inputPanel.add(slangLabel, gbc);
 
         // Panel to input
+        gbc.gridy=2;
         slangField = new JTextField(15);
         slangField.setFont(font);
         gbc.weightx = 1.0;
         inputPanel.add(slangField, gbc);
 
+        // JPanel buttonPanel = new JPanel();
+        gbc.gridy=3;
+        gbc.gridx=0;
         // Button to find the definition of the slang
         JButton findButton = createButton("Find", font);
-        gbc.weightx = 0.0;
+        gbc.weightx = 1.0;
         findButton.setText("Find");
         findButton.addActionListener(action);
-
-        inputPanel.add(findButton, gbc);
+        inputPanel.add(findButton,gbc);
+        // buttonPanel.add(findButton);
 
         // Button to delete
+        gbc.gridy=4;
+        gbc.gridx=0;
         JButton deleteButton = createButton("Delete", font);
-        gbc.weightx = 0.0;
-        inputPanel.add(deleteButton, gbc);
+        gbc.weightx = 1.0;
         deleteButton.setText("Delete");
         deleteButton.addActionListener(action);
+        inputPanel.add(deleteButton,gbc);
+        // buttonPanel.add(deleteButton);
 
-        // Deal with the space empty
-        GridBagConstraints gbcFiller = new GridBagConstraints();
-        gbcFiller.gridwidth = GridBagConstraints.REMAINDER;
-        gbcFiller.fill = GridBagConstraints.BOTH;
-        gbcFiller.weightx = 1;
-        gbcFiller.weighty = 50;
-        inputPanel.add(new JPanel(), gbcFiller);
+        // inputPanel.add(buttonPanel,gbc);
 
         return inputPanel;
     }
@@ -181,8 +184,6 @@ public class DeleteSlangView extends JFrame{
 
         // Add the value to the table
 
-
-
         // Edit the feature of table
         table.setFillsViewportHeight(false);
         table.setRowHeight(30);
@@ -190,7 +191,7 @@ public class DeleteSlangView extends JFrame{
         // Add the table to scrollPane
         JScrollPane scrollPane = new JScrollPane(table);
         Dimension preferredSize = scrollPane.getPreferredSize();
-        preferredSize.height = 330;
+        preferredSize.height = 370;
         scrollPane.setPreferredSize(preferredSize);
 
         // Display
