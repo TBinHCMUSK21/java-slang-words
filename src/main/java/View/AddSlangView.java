@@ -7,10 +7,18 @@
 
 package View;
 
+import Controller.AddSlangController;
+import Main.Main;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 
 public class AddSlangView extends JFrame {
+
+    public JTextField slangField;
+    public JTextField definitionField;
 
     /**
      * The main frame
@@ -80,6 +88,9 @@ public class AddSlangView extends JFrame {
      */
 
     private JPanel createInputPanel(Font font) {
+
+        AddSlangController action = new AddSlangController(this);
+
         // Initial the input panel
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridBagLayout());
@@ -99,7 +110,7 @@ public class AddSlangView extends JFrame {
         inputPanel.add(slangLabel, gbc);
 
         // Field to input the slang word
-        JTextField slangField = new JTextField(15);
+        slangField = new JTextField(15);
         slangField.setFont(font);
         gbc.weightx = 1.0;
         inputPanel.add(slangField, gbc);
@@ -111,15 +122,17 @@ public class AddSlangView extends JFrame {
         inputPanel.add(definitionLabel, gbc);
 
         // Field to input the definition
-        JTextField definitionField = new JTextField(15);
+        definitionField = new JTextField(15);
         definitionField.setFont(font);
         gbc.weightx = 1.0;
         inputPanel.add(definitionField, gbc);
 
         // Button add to add the new slang
         JButton addButton = createButton("Add", font);
+        addButton.setName("Add");
         gbc.weightx = 0.0;
         inputPanel.add(addButton, gbc);
+        addButton.addActionListener(action);
 
         // Deal with the space empty to push the content to the top
         GridBagConstraints gbcFiller = new GridBagConstraints();
@@ -144,5 +157,36 @@ public class AddSlangView extends JFrame {
         return button;
     }
 
+    public void addANewSlang() {
+        String slang = slangField.getText();
+        String userDefinition = definitionField.getText();
+        LinkedHashSet<String>  definition = new LinkedHashSet<>
+                (Arrays.stream(userDefinition.split("\\|"))
+                .map(String::trim)
+                .toList());
+        if (Main.listSlangWord.getListSlangWord().get(slang)!=null){
+            Object[] options = {"Overwrite", "Duplicate", "Cancel"};
+            int result = JOptionPane.showOptionDialog(this,
+                    "This slang word already exists. What would you like to do?",
+                    "Slang Exists",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[2]);
+            if (result == JOptionPane.YES_OPTION) {
+                Main.listSlangWord.getListSlangWord().put(slang,definition);
+                JOptionPane.showMessageDialog(this,"Success!!!");
+            }
+            if (result == JOptionPane.NO_OPTION){
+                Main.listSlangWord.getListSlangWord().get(slang).addAll(definition);
+                JOptionPane.showMessageDialog(this,"Success!!!");
+            }
+        }
+        else {
+            Main.listSlangWord.getListSlangWord().put(slang,definition);
+            JOptionPane.showMessageDialog(this,"Success!!!");
+        }
 
+    }
 }

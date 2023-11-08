@@ -7,11 +7,18 @@
 
 package Controller;
 
+import View.AddSlangView;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 
 public class AddSlangController implements Action {
+    private AddSlangView currentView;
+
+    public AddSlangController(AddSlangView currentView){
+        this.currentView=currentView;
+    }
     @Override
     public Object getValue(String key) {
         return null;
@@ -44,6 +51,9 @@ public class AddSlangController implements Action {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        String str = e.getActionCommand();
+        if (str.equals("Add")){
+            this.currentView.addANewSlang();
+        }
     }
 }
