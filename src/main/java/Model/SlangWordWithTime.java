@@ -9,20 +9,20 @@ package Model;
 import java.time.LocalDateTime;
 
 public class SlangWordWithTime {
-    private OneSlangWord slangwords;
+    private OneSlangWord slangWords;
     private LocalDateTime time;
 
-    public SlangWordWithTime(OneSlangWord slangwords, LocalDateTime time) {
-        this.slangwords = slangwords;
+    public SlangWordWithTime(OneSlangWord slangWords, LocalDateTime time) {
+        this.slangWords = slangWords;
         this.time = time;
     }
 
-    public OneSlangWord getSlangwords() {
-        return slangwords;
+    public OneSlangWord getSlangWords() {
+        return slangWords;
     }
 
-    public void setSlangwords(OneSlangWord slangwords) {
-        this.slangwords = slangwords;
+    public void setSlangWords(OneSlangWord slangWords) {
+        this.slangWords = slangWords;
     }
 
     public LocalDateTime getTime() {

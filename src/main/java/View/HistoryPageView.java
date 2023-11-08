@@ -117,8 +117,8 @@ public class HistoryPageView extends JFrame {
         // Add data to table
         int count = 1;
         for (SlangWordWithTime slangWord:Main.historySlangWord) {
-            String key = slangWord.getSlangwords().getSlang();
-            LinkedHashSet<String> value =slangWord.getSlangwords().getDefinitions();
+            String key = slangWord.getSlangWords().getSlang();
+            LinkedHashSet<String> value =slangWord.getSlangWords().getDefinitions();
             LocalDateTime time = slangWord.getTime();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss");
             String formattedDateTime = time.format(formatter);

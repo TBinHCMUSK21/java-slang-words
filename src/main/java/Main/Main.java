@@ -9,7 +9,6 @@ package Main;
 
 
 import Model.ListSlangWord;
-import Model.OneSlangWord;
 import Model.SlangWordWithTime;
 import Utils.SlangFileHelpers;
 import View.*;

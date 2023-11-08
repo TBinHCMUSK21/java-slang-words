@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 
 public class AddSlangController implements Action {
-    private AddSlangView currentView;
+    private final AddSlangView currentView;
 
     public AddSlangController(AddSlangView currentView){
         this.currentView=currentView;

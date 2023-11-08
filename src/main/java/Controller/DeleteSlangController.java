@@ -6,8 +6,6 @@
  */
 
 package Controller;
-
-import Main.Main;
 import View.DeleteSlangView;
 
 import javax.swing.*;

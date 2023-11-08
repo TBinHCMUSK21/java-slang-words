@@ -10,7 +10,6 @@ import Model.ListSlangWord;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class SlangFileHelpers implements FileHelpers<ListSlangWord> {
     private String path;
