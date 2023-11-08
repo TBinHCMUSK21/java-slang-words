@@ -7,6 +7,8 @@
 
 package Model;
 
+import Main.Main;
+
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -56,8 +58,9 @@ public class ListSlangWord {
         }
         return builder.toString();
     }
-    public void copy(ListSlangWord listSlangWord){
-        for (Map.Entry<String, LinkedHashSet<String>> entry : listSlangWord.getListSlangWord().entrySet()) {
+    public void copy(ListSlangWord another){
+        Main.listSlangWord.getListSlangWord().clear();
+        for (Map.Entry<String, LinkedHashSet<String>> entry : another.getListSlangWord().entrySet()) {
             String key = entry.getKey();
             LinkedHashSet<String> value = entry.getValue();
             this.listSlangWord.put(key,value);
@@ -80,5 +83,15 @@ public class ListSlangWord {
             }
         }
         return result;
+    }
+    public void editSlang(String prev_slang,String new_slang){
+        LinkedHashSet<String> definition =this.listSlangWord.get(prev_slang);
+        this.listSlangWord.remove(prev_slang);
+        this.listSlangWord.put(new_slang,definition);
+
+    }
+    public void editDefinition(String prev_definition,String new_definition,String slang){
+        this.listSlangWord.get(slang).remove(prev_definition);
+        this.listSlangWord.get(slang).add(new_definition);
     }
 }

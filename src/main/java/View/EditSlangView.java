@@ -227,14 +227,11 @@ public class EditSlangView extends JFrame {
             String prev_slang = (String) this.previousTableModel.getValueAt(row,1);
             String prev_definition = (String) this.previousTableModel.getValueAt(row,2);
             if (!new_slang.equals(prev_slang)){
-                LinkedHashSet<String> definition = Main.listSlangWord.getListSlangWord().get(prev_slang);
-                Main.listSlangWord.getListSlangWord().remove(prev_slang);
-                Main.listSlangWord.getListSlangWord().put(new_slang,definition);
+                Main.listSlangWord.editSlang(prev_slang,new_slang);
                 JOptionPane.showMessageDialog(this,"Success!!!");
             }
             else if (!new_definition.equals(prev_definition)){
-                Main.listSlangWord.getListSlangWord().get(prev_slang).remove(prev_definition);
-                Main.listSlangWord.getListSlangWord().get(prev_slang).add(new_definition);
+                Main.listSlangWord.editDefinition(prev_definition,new_definition,prev_slang);
                 JOptionPane.showMessageDialog(this,"Success!!!");
             }
         }

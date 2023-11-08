@@ -23,7 +23,11 @@ public class TableModelChangeController implements TableModelListener {
         if (e.getType() == TableModelEvent.UPDATE) {
             int row = e.getFirstRow();
             int column = e.getColumn();
-            this.currentView.editTheSlang(row,column);
+            String value = (String) this.currentView.tableModel.getValueAt(row,column);
+            if (!value.isEmpty()){
+                this.currentView.editTheSlang(row,column);
+            }
+            else JOptionPane.showMessageDialog(this.currentView,"Can not empty!!!");
         }
     }
 }

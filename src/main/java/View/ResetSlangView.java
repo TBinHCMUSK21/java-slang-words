@@ -147,6 +147,7 @@ public class ResetSlangView extends JFrame {
     }
 
     public void resetTheOrigin() {
+
         Main.listSlangWord.copy(originSlangWord);
         tableModel.setRowCount(0);
         int count = 1;
