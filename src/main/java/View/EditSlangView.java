@@ -10,6 +10,8 @@ package View;
 import Controller.EditSlangController;
 import Controller.TableModelChangeController;
 import Main.Main;
+import Model.OneSlangWord;
+import Model.SlangWordWithTime;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -211,11 +213,8 @@ public class EditSlangView extends JFrame {
                 previousTableModel.addRow(new Object[]{count,slang,string});
                 count = count + 1;
             }
-            Main.historySlangWord.getListSlangWord().put(slang,definition);
-
         }
         else{
-            Main.historySlangWord.getListSlangWord().put(slang,null);
             JOptionPane.showMessageDialog(this,"Not Found");
         }
     }

@@ -9,22 +9,25 @@ package Main;
 
 
 import Model.ListSlangWord;
+import Model.OneSlangWord;
+import Model.SlangWordWithTime;
 import Utils.SlangFileHelpers;
 import View.*;
 import javax.swing.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Main {
     public static ListSlangWord listSlangWord;
-    public static ListSlangWord historySlangWord;
+    public static ArrayList<SlangWordWithTime> historySlangWord;
     public static ListSlangWord originSlangWord;
     public static void main(String[] args) throws IOException {
         SlangFileHelpers fileHelper = new SlangFileHelpers("slang.txt");
 
         listSlangWord = fileHelper.readAllLines();
         originSlangWord = fileHelper.readAllLines();
-        historySlangWord = new ListSlangWord();
+        historySlangWord = new ArrayList<>();
 
         SwingUtilities.invokeLater(() -> new HomePageView().setVisible(true));
     }

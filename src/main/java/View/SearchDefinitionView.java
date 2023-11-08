@@ -11,12 +11,14 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
 import Controller.SearchDefinitionController;
 import Main.*;
 import Model.OneSlangWord;
+import Model.SlangWordWithTime;
 
 
 public class SearchDefinitionView extends JFrame {
@@ -140,13 +142,17 @@ public class SearchDefinitionView extends JFrame {
             int count = 1;
             for (String item:result){
                 listModel.addRow(new Object[]{count,item,Main.listSlangWord.getListSlangWord().get(item)});
-                Main.historySlangWord.getListSlangWord().put(item,Main.listSlangWord.getListSlangWord().get(item));
+                LocalDateTime time = LocalDateTime.now();
+                Main.historySlangWord.add(new SlangWordWithTime(new OneSlangWord(item,
+                        Main.listSlangWord.getListSlangWord().get(item)),time));
                 count = count + 1;
             }
 
         }
         else{
-            Main.historySlangWord.getListSlangWord().put(null,new LinkedHashSet<>(Arrays.asList(definition)));
+            LocalDateTime time = LocalDateTime.now();
+            Main.historySlangWord.add(new SlangWordWithTime(new OneSlangWord(null,
+                    new LinkedHashSet<>(Arrays.asList(definition))),time));
             JOptionPane.showMessageDialog(this,"Not Found");
         }
     }

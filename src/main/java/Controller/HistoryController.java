@@ -7,11 +7,18 @@
 
 package Controller;
 
+import View.HistoryPageView;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 
 public class HistoryController implements Action {
+    private final HistoryPageView currentView;
+
+    public HistoryController(HistoryPageView currentView){
+        this.currentView=currentView;
+    }
     @Override
     public Object getValue(String key) {
         return null;
@@ -44,6 +51,9 @@ public class HistoryController implements Action {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        String str = e.getActionCommand();
+        if (str.equals("Clear")){
+            this.currentView.removeAllHistory();
+        }
     }
 }

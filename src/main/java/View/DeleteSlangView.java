@@ -211,10 +211,8 @@ public class DeleteSlangView extends JFrame{
                 tableModel.addRow(new Object[]{count,slang,string});
                 count = count + 1;
             }
-            Main.historySlangWord.getListSlangWord().put(slang,definition);
         }
         else{
-            Main.historySlangWord.getListSlangWord().put(slang,null);
             JOptionPane.showMessageDialog(this,"Not Found");
         }
     }

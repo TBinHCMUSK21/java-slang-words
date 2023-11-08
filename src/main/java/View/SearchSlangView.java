@@ -8,11 +8,14 @@
 package View;
 import Controller.SearchSlangController;
 import Main.Main;
+import Model.OneSlangWord;
+import Model.SlangWordWithTime;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 
 
@@ -137,10 +140,12 @@ public class SearchSlangView extends JFrame {
                listModel.addRow(new Object[]{count,slang,string});
                count = count + 1;
            }
-           Main.historySlangWord.getListSlangWord().put(slang,definition);
+           LocalDateTime time = LocalDateTime.now();
+           Main.historySlangWord.add(new SlangWordWithTime(new OneSlangWord(slang,definition),time));
         }
         else{
-            Main.historySlangWord.getListSlangWord().put(slang,null);
+            LocalDateTime time = LocalDateTime.now();
+            Main.historySlangWord.add(new SlangWordWithTime(new OneSlangWord(slang,null),time));
             JOptionPane.showMessageDialog(this,"Not Found");
         }
     }
