@@ -7,13 +7,27 @@
 
 package View;
 
+import Controller.EditSlangController;
+import Controller.TableModelChangeController;
+import Main.Main;
+
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Vector;
 
 
 public class EditSlangView extends JFrame {
+    public JTextField slangField;
+    public DefaultTableModel tableModel;
+
+    public DefaultTableModel previousTableModel;
+
     /**
      * Main frame
      */
@@ -82,6 +96,7 @@ public class EditSlangView extends JFrame {
      * @return inputPanel: The JPanel to input the slang word
      */
     private JPanel createInputPanel(Font font) {
+        EditSlangController action = new EditSlangController(this);
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridBagLayout());
         inputPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
@@ -99,7 +114,7 @@ public class EditSlangView extends JFrame {
         inputPanel.add(slangLabel, gbc);
 
         // Add the field to input
-        JTextField slangField = new JTextField(15);
+        slangField = new JTextField(15);
         slangField.setFont(font);
         gbc.weightx = 1.0;
         inputPanel.add(slangField, gbc);
@@ -107,6 +122,8 @@ public class EditSlangView extends JFrame {
         // Add the button
         JButton findButton = createButton("Find", font);
         gbc.weightx = 0.0;
+        findButton.setText("Find");
+        findButton.addActionListener(action);
 
         inputPanel.add(findButton, gbc);
 
@@ -149,7 +166,9 @@ public class EditSlangView extends JFrame {
      * @return scrollPane: A JScrollPane to display a list slang-definitions
      */
     private JScrollPane createListScroller() {
-        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {};
+
+        TableModelChangeController action = new TableModelChangeController(this);
+        tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {};
 
         // Create Table
         Font tableFont = new Font("Arial", Font.PLAIN, 16);
@@ -159,10 +178,8 @@ public class EditSlangView extends JFrame {
         header.setFont(tableFont);
 
         // Add data to table
-        tableModel.addRow(new Object[]{1, "Slang 1", "Meaning 1"});
-        tableModel.addRow(new Object[]{2, "Slang 2", "Meaning 2"});
-        tableModel.addRow(new Object[]{3, "Slang 3", "Meaning 3"});
-
+        tableModel.setRowCount(0);
+        tableModel.addTableModelListener(action);
 
         // Feature for table
         table.setFillsViewportHeight(false);
@@ -180,5 +197,46 @@ public class EditSlangView extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         return scrollPane;
+    }
+
+    public void findTheSlang() {
+        tableModel.setRowCount(0);
+        String slang = slangField.getText();
+        previousTableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {};
+        if (Main.listSlangWord.getListSlangWord().get(slang)!=null){
+            LinkedHashSet<String> definition = Main.listSlangWord.searchBySlang(slang);
+            int count = 1;
+            for (String string:definition){
+                tableModel.addRow(new Object[]{count,slang,string});
+                previousTableModel.addRow(new Object[]{count,slang,string});
+                count = count + 1;
+            }
+            Main.historySlangWord.getListSlangWord().put(slang,definition);
+
+        }
+        else{
+            Main.historySlangWord.getListSlangWord().put(slang,null);
+            JOptionPane.showMessageDialog(this,"Not Found");
+        }
+    }
+
+    public void editTheSlang(int row,int column) {
+        if (row >= 0 && column >= 0) {
+            String new_slang = (String)tableModel.getValueAt(row,1);
+            String new_definition = (String)tableModel.getValueAt(row,2);
+            String prev_slang = (String) this.previousTableModel.getValueAt(row,1);
+            String prev_definition = (String) this.previousTableModel.getValueAt(row,2);
+            if (!new_slang.equals(prev_slang)){
+                LinkedHashSet<String> definition = Main.listSlangWord.getListSlangWord().get(prev_slang);
+                Main.listSlangWord.getListSlangWord().remove(prev_slang);
+                Main.listSlangWord.getListSlangWord().put(new_slang,definition);
+                JOptionPane.showMessageDialog(this,"Success!!!");
+            }
+            else if (!new_definition.equals(prev_definition)){
+                Main.listSlangWord.getListSlangWord().get(prev_slang).remove(prev_definition);
+                Main.listSlangWord.getListSlangWord().get(prev_slang).add(new_definition);
+                JOptionPane.showMessageDialog(this,"Success!!!");
+            }
+        }
     }
 }
