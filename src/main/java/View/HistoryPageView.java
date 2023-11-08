@@ -25,7 +25,7 @@ public class HistoryPageView extends JFrame {
         setTitle("Slang Dictionary Search");
         initializeComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 675);
+        setSize(1000, 675);
         setLocationRelativeTo(null);
         setVisible(true);
     }

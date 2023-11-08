@@ -10,6 +10,7 @@ import Model.ListSlangWord;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SlangFileHelpers implements FileHelpers<ListSlangWord> {
     private String path;
@@ -44,9 +45,14 @@ public class SlangFileHelpers implements FileHelpers<ListSlangWord> {
                 if (splitWord.length<=1){
                     continue;
                 }
-                LinkedHashSet<String> definitions = new LinkedHashSet<>
-                        (Arrays.asList(splitWord[1].split("\\|")));
-                data.put(splitWord[0],definitions);
+                List<String> tmp = Arrays.stream(splitWord[1].split("\\|"))
+                        .map(String::trim)
+                        .toList();
+                LinkedHashSet<String> definitions = new LinkedHashSet<>(tmp);
+                if (data.get(splitWord[0])!=null){
+                    data.get(splitWord[0]).addAll(definitions);
+                }
+                else data.put(splitWord[0],definitions);
             }
             fin.close();
         }

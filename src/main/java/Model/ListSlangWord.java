@@ -7,9 +7,6 @@
 
 package Model;
 
-import Main.Main;
-
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -59,13 +56,12 @@ public class ListSlangWord {
         }
         return builder.toString();
     }
-    public ListSlangWord copy(ListSlangWord listSlangWord){
+    public void copy(ListSlangWord listSlangWord){
         for (Map.Entry<String, LinkedHashSet<String>> entry : listSlangWord.getListSlangWord().entrySet()) {
             String key = entry.getKey();
             LinkedHashSet<String> value = entry.getValue();
             this.listSlangWord.put(key,value);
         }
-        return this;
     }
     public LinkedHashSet<String> searchBySlang(String slang) {
         return this.listSlangWord.get(slang);
@@ -85,6 +81,4 @@ public class ListSlangWord {
         }
         return result;
     }
-
-
 }
