@@ -7,6 +7,7 @@
 
 package View;
 
+import Controller.QuizDefinitionController;
 import Main.Main;
 import Model.OneSlangWord;
 
@@ -17,6 +18,12 @@ import java.util.Random;
 
 public class QuizDefinitionView extends JFrame{
     public ArrayList<OneSlangWord> content;
+
+    public JLabel questionLabel;
+
+    public Random random = new Random();
+
+    public JButton[] button = new JButton[4];
 
     public int rightOption;
     /**
@@ -50,10 +57,21 @@ public class QuizDefinitionView extends JFrame{
      * @return mainContent: JPanel display content
      */
     private JPanel createMainContent(Font font){
+        QuizDefinitionController action = new QuizDefinitionController(this);
         JPanel mainContent = new JPanel(new BorderLayout());
         mainContent.setBackground(Color.WHITE);
         mainContent.add(createTitle(), BorderLayout.NORTH);
         mainContent.add(createContentPanel(font), BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setPreferredSize(new Dimension(200, 100));
+        JButton button = new JButton("Next");
+        button.setPreferredSize(new Dimension(200, 50));
+        buttonPanel.add(button);
+        button.setActionCommand("Next");
+        button.addActionListener(action);
+
+        mainContent.add(buttonPanel,BorderLayout.SOUTH);
         return mainContent;
     }
 
@@ -74,6 +92,7 @@ public class QuizDefinitionView extends JFrame{
      * @return contentPage: Panel display content
      */
     private JPanel createContentPanel(Font font) {
+        QuizDefinitionController action = new QuizDefinitionController(this);
         JPanel contentPage = new JPanel();
         contentPage.setLayout(new GridBagLayout());
         contentPage.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
@@ -92,33 +111,41 @@ public class QuizDefinitionView extends JFrame{
         contentPage.add(titleLabel, gbc);
 
         // Question
-        JLabel questionLabel = new JLabel("Definition: ");
-        questionLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        gbc.gridy++;
-        gbc.gridwidth = 2;
-        contentPage.add(questionLabel, gbc);
-
         this.content=new ArrayList<>();
-        Random random = new Random();
+
         for (int i=0;i<4;i++){
             content.add(Main.listSlangWord.randomOneSlang());
         }
         rightOption = random.nextInt(4);
 
-        JToggleButton[] button = new JToggleButton[4];
+        questionLabel = new JLabel("Definition: " + content.get(rightOption).getDefinitions().getFirst());
+        questionLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        contentPage.add(questionLabel, gbc);
 
-        for (int i = 0;i<button.length;i++){
+        // Add the button
+        Dimension buttonSize = new Dimension(150, 40);
+        for (int i = 0;i <button.length;i++){
             if (i==rightOption){
-                button[i] = new JToggleButton(content.get(rightOption).getDefinitions().getFirst());
+                String buttonText = content.get(rightOption).getSlang();
+                button[i] = new JButton(buttonText);
+                button[i].setToolTipText(buttonText);
+                button[i].setActionCommand(Integer.toString(i));
             }
             else{
-                button[i] = new JToggleButton(content.get(i).getDefinitions().getFirst());
+                String buttonText = content.get(i).getSlang();
+                button[i] = new JButton(buttonText);
+                button[i].setToolTipText(buttonText);
+                button[i].setActionCommand(Integer.toString(i));
             }
-            button[i].setName(""+i);
+            button[i].setPreferredSize(buttonSize);
+            button[i].addActionListener(action);
+
         }
 
         // Button figure
-        for (JToggleButton eachButton:button){
+        for (JButton eachButton:button){
             eachButton.setFont(font);
         }
         int[] position_gridx = {
@@ -142,5 +169,41 @@ public class QuizDefinitionView extends JFrame{
         }
 
         return contentPage;
+    }
+    public void displayRightChoose() {
+        button[rightOption].setBackground(Color.GREEN);
+        JOptionPane.showMessageDialog(this,"Congratulations!!!");
+        for (JButton jButton : button) {
+            jButton.setEnabled(false);
+            jButton.setForeground(Color.BLACK);
+        }
+    }
+    public void displayWrongChoose(String str) {
+        button[rightOption].setBackground(Color.GREEN);
+        button[Integer.parseInt(str)].setBackground(Color.RED);
+        JOptionPane.showMessageDialog(this,"Wrong answer!!!");
+        for (JButton jButton : button) {
+            jButton.setEnabled(false);
+            jButton.setForeground(Color.BLACK);
+        }
+    }
+
+    public void randomNew() {
+        content.clear();
+        for (int i=0;i<4;i++){
+            content.add(Main.listSlangWord.randomOneSlang());
+        }
+        rightOption = random.nextInt(4);
+        questionLabel.setText("Definition: " + content.get(rightOption).getDefinitions().getFirst());
+        for (int i = 0;i <button.length;i++){
+            button[i].setEnabled(true);
+            button[i].setBackground(null);
+            if (i==rightOption){
+                button[i].setText(content.get(rightOption).getSlang());
+            }
+            else{
+                button[i].setText(content.get(i).getSlang());
+            }
+        }
     }
 }
