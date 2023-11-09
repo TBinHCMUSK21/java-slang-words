@@ -24,47 +24,47 @@ public class SlideBarController implements MouseListener {
         String ec = e.getComponent().getName();
         switch (ec) {
             case "HomePage" -> {
-                currentView.dispose();
+                currentView.setVisible(false);
                 currentView = new HomePageView();
             }
             case "Search by slang word" -> {
-                currentView.dispose();
+                currentView.setVisible(false);
                 currentView = new SearchSlangView();
             }
             case "Search by definition" -> {
-                currentView.dispose();
+                currentView.setVisible(false);
                 currentView = new SearchDefinitionView();
             }
             case "Display history search" -> {
-                currentView.dispose();
+                currentView.setVisible(false);
                 currentView = new HistoryPageView();
             }
             case "Add a new slang word" -> {
-                currentView.dispose();
+                currentView.setVisible(false);
                 currentView = new AddSlangView();
             }
             case "Edit a slang word" -> {
-                currentView.dispose();
+                currentView.setVisible(false);
                 currentView = new EditSlangView();
             }
             case "Delete a slang word" -> {
-                currentView.dispose();
+                currentView.setVisible(false);
                 currentView = new DeleteSlangView();
             }
             case "Reset the origin slang word" -> {
-                currentView.dispose();
+                currentView.setVisible(false);
                 currentView = new ResetSlangView();
             }
             case "Random slang word" -> {
-                currentView.dispose();
+                currentView.setVisible(false);
                 currentView = new RandomSlangView();
             }
             case "Game with slang word" -> {
-                currentView.dispose();
+                currentView.setVisible(false);
                 currentView = new QuizSlangView();
             }
             case "Game with definitions" -> {
-                currentView.dispose();
+                currentView.setVisible(false);
                 currentView = new QuizDefinitionView();
             }
         }

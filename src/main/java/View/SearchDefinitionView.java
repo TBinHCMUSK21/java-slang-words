@@ -11,6 +11,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -19,6 +22,8 @@ import Controller.SearchDefinitionController;
 import Main.*;
 import Model.OneSlangWord;
 import Model.SlangWordWithTime;
+import Utils.HistorySlangFileHelpers;
+import Utils.SlangFileHelpers;
 
 
 public class SearchDefinitionView extends JFrame {
@@ -32,6 +37,26 @@ public class SearchDefinitionView extends JFrame {
         setSize(1000, 675);
         setLocationRelativeTo(null);
         setVisible(true);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
+                fileHelpersOut.setPath("slang-new.txt");
+                try {
+                    fileHelpersOut.writeLines(Main.listSlangWord);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
+                historySlangFileHelpers.setPath("history-slang.txt");
+                try {
+                    historySlangFileHelpers.writeLines(Main.historySlangWord);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
     private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);

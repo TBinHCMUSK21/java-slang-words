@@ -10,8 +10,14 @@ package View;
 import Controller.QuizSlangController;
 import Main.Main;
 import Model.OneSlangWord;
+import Utils.HistorySlangFileHelpers;
+import Utils.SlangFileHelpers;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -35,6 +41,26 @@ public class QuizSlangView extends JFrame{
         setSize(1000, 675);
         setLocationRelativeTo(null);
         setVisible(true);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
+                fileHelpersOut.setPath("slang-new.txt");
+                try {
+                    fileHelpersOut.writeLines(Main.listSlangWord);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
+                historySlangFileHelpers.setPath("history-slang.txt");
+                try {
+                    historySlangFileHelpers.writeLines(Main.historySlangWord);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 
     /**

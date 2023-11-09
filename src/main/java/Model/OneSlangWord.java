@@ -67,12 +67,17 @@ public class OneSlangWord {
         StringBuilder builder = new StringBuilder();
         builder.append(this.slang);
         builder.append("`");
-        for (String string:this.definitions){
-            if (!string.equals(this.definitions.getLast())){
-                builder.append(string);
-                builder.append("|");
+        if (this.definitions != null){
+            for (String string:this.definitions){
+                if (!string.equals(this.definitions.getLast())){
+                    builder.append(string);
+                    builder.append("|");
+                }
+                else builder.append(string);
             }
-            else builder.append(string);
+        }
+        else{
+            builder.append("null");
         }
         return builder.toString();
     }

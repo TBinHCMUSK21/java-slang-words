@@ -47,6 +47,7 @@ public class HistorySlangFileHelpers implements FileHelpers<ArrayList<SlangWordW
         ArrayList<SlangWordWithTime> data = new ArrayList<>();
         try {
             BufferedReader fin = new BufferedReader(new FileReader(path));
+            fin.readLine();
             while (true) {
                 String str = fin.readLine();
                 if (str == null) {
