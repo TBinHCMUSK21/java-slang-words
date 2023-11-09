@@ -7,7 +7,6 @@
 
 package Main;
 
-
 import Model.ListSlangWord;
 import Model.SlangWordWithTime;
 import Utils.SlangFileHelpers;
@@ -16,16 +15,15 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class Main {
     public static ListSlangWord listSlangWord;
     public static ArrayList<SlangWordWithTime> historySlangWord;
     public static ListSlangWord originSlangWord;
     public static void main(String[] args) throws IOException {
-        SlangFileHelpers fileHelper = new SlangFileHelpers("slang.txt");
+        SlangFileHelpers fileHelperIn = new SlangFileHelpers("slang.txt");
 
-        listSlangWord = fileHelper.readAllLines();
-        originSlangWord = fileHelper.readAllLines();
+        listSlangWord = fileHelperIn.readAllLines();
+        originSlangWord = fileHelperIn.readAllLines();
         historySlangWord = new ArrayList<>();
 
         SwingUtilities.invokeLater(() -> new HomePageView().setVisible(true));

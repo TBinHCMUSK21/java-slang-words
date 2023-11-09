@@ -16,7 +16,7 @@ import java.awt.event.MouseListener;
 public class SlideBarView extends JPanel {
 
     public SlideBarView(JFrame currentFrame) {
-        MouseListener action = new SlideBarController(currentFrame, this);
+        MouseListener action = new SlideBarController(currentFrame);
         /*
           Layout
          */
@@ -103,7 +103,7 @@ public class SlideBarView extends JPanel {
 
         // Label for text
         JLabel label = new JLabel(text);
-        label.setForeground(Color.WHITE); // Màu chữ
+        label.setForeground(Color.WHITE);
         label.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Add Label

@@ -13,12 +13,10 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 public class SlideBarController implements MouseListener {
-    public JPanel view;
     private JFrame currentView;
 
-    public SlideBarController(JFrame mainFrame, JPanel contentPanel) {
+    public SlideBarController(JFrame mainFrame) {
         this.currentView = mainFrame;
-        this.view = contentPanel;
     }
 
     @Override

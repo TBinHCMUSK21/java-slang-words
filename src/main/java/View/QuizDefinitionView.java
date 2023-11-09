@@ -7,10 +7,18 @@
 
 package View;
 
+import Main.Main;
+import Model.OneSlangWord;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class QuizDefinitionView extends JFrame{
+    public ArrayList<OneSlangWord> content;
+
+    public int rightOption;
     /**
      * The main layout
      */
@@ -90,50 +98,48 @@ public class QuizDefinitionView extends JFrame{
         gbc.gridwidth = 2;
         contentPage.add(questionLabel, gbc);
 
-        // Add the button
-        JToggleButton buttonA = new JToggleButton("A. Option 1");
-        JToggleButton buttonB = new JToggleButton("B. Option 2");
-        JToggleButton buttonC = new JToggleButton("C. Option 3");
-        JToggleButton buttonD = new JToggleButton("D. Option 4");
+        this.content=new ArrayList<>();
+        Random random = new Random();
+        for (int i=0;i<4;i++){
+            content.add(Main.listSlangWord.randomOneSlang());
+        }
+        rightOption = random.nextInt(4);
 
-        // The main setting of button
-        buttonA.setFont(font);
-        buttonB.setFont(font);
-        buttonC.setFont(font);
-        buttonD.setFont(font);
+        JToggleButton[] button = new JToggleButton[4];
 
-        // Add a button to group
-        ButtonGroup group = new ButtonGroup();
-        group.add(buttonA);
-        group.add(buttonB);
-        group.add(buttonC);
-        group.add(buttonD);
+        for (int i = 0;i<button.length;i++){
+            if (i==rightOption){
+                button[i] = new JToggleButton(content.get(rightOption).getDefinitions().getFirst());
+            }
+            else{
+                button[i] = new JToggleButton(content.get(i).getDefinitions().getFirst());
+            }
+            button[i].setName(""+i);
+        }
 
+        // Button figure
+        for (JToggleButton eachButton:button){
+            eachButton.setFont(font);
+        }
+        int[] position_gridx = {
+                0,1,0,1
+        };
+        int[] position_gridy = {
+                2,2,3,3
+        };
         // Add the button to layout
         GridBagConstraints gbcButtons = new GridBagConstraints();
         gbcButtons.fill = GridBagConstraints.BOTH;
         gbcButtons.insets = new Insets(5, 5, 5, 5);
         gbcButtons.weightx = 0.5;
         gbcButtons.weighty = 0.5;
-        gbcButtons.gridx = 0;
-        gbcButtons.gridy = 2;
         gbcButtons.gridwidth = 1;
 
-        // Add the first button
-        contentPage.add(buttonA, gbcButtons);
-
-        // Add the second button
-        gbcButtons.gridx = 1;
-        contentPage.add(buttonB, gbcButtons);
-
-        // Add the third button
-        gbcButtons.gridx = 0;
-        gbcButtons.gridy = 3;
-        contentPage.add(buttonC, gbcButtons);
-
-        // Add the fourth button
-        gbcButtons.gridx = 1;
-        contentPage.add(buttonD, gbcButtons);
+        for (int i =0;i<4;i++){
+            gbcButtons.gridx=position_gridx[i];
+            gbcButtons.gridy=position_gridy[i];
+            contentPage.add(button[i],gbcButtons);
+        }
 
         return contentPage;
     }

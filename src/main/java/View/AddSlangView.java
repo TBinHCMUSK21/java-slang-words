@@ -37,7 +37,6 @@ public class AddSlangView extends JFrame {
      */
     private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
-
         setLayout(new BorderLayout());
         SlideBarView sidebar = new SlideBarView(this);
         add(sidebar, BorderLayout.WEST);
