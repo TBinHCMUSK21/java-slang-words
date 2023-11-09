@@ -4,11 +4,8 @@
  * Date 11/6/23, 2:39 AM
  * Description: Sidebar view
  */
-
 package View;
-
 import Controller.SlideBarController;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
@@ -104,7 +101,7 @@ public class SlideBarView extends JPanel {
         // Label for text
         JLabel label = new JLabel(text);
         label.setForeground(Color.WHITE);
-        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setHorizontalAlignment(SwingConstants.LEFT);
 
         // Add Label
         menuItem.add(label, BorderLayout.CENTER);

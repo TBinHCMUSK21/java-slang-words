@@ -18,6 +18,12 @@ import java.util.Random;
 public class QuizSlangView extends JFrame{
     public ArrayList<OneSlangWord> content;
 
+    public JLabel questionLabel;
+
+    public Random random = new Random();
+
+    public JButton[] button = new JButton[4];
+
     public int rightOption;
     /**
      * The main frame
@@ -48,10 +54,21 @@ public class QuizSlangView extends JFrame{
      * @return mainContent: the panel of the content
      */
     private JPanel createMainContent(Font font){
+        QuizSlangController action = new QuizSlangController(this);
         JPanel mainContent = new JPanel(new BorderLayout());
         mainContent.setBackground(Color.WHITE);
         mainContent.add(createTitle(), BorderLayout.NORTH);
         mainContent.add(createContentPanel(font), BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setPreferredSize(new Dimension(200, 100));
+        JButton button = new JButton("Next");
+        button.setPreferredSize(new Dimension(200, 50));
+        buttonPanel.add(button);
+        button.setActionCommand("Next");
+        button.addActionListener(action);
+
+        mainContent.add(buttonPanel,BorderLayout.SOUTH);
         return mainContent;
     }
 
@@ -92,33 +109,34 @@ public class QuizSlangView extends JFrame{
 
         // Question
         this.content=new ArrayList<>();
-        Random random = new Random();
+
         for (int i=0;i<4;i++){
             content.add(Main.listSlangWord.randomOneSlang());
         }
         rightOption = random.nextInt(4);
 
-        JLabel questionLabel = new JLabel("Slang: " + content.get(rightOption).getSlang());
+        questionLabel = new JLabel("Slang: " + content.get(rightOption).getSlang());
         questionLabel.setFont(new Font("Arial", Font.BOLD, 20));
         gbc.gridy++;
         gbc.gridwidth = 2;
         contentPage.add(questionLabel, gbc);
 
         // Add the button
-        JToggleButton[] button = new JToggleButton[4];
 
         for (int i = 0;i <button.length;i++){
             if (i==rightOption){
-                button[i] = new JToggleButton(content.get(rightOption).getDefinitions().getFirst());
+                button[i] = new JButton(content.get(rightOption).getDefinitions().getFirst());
+                button[i].setActionCommand(Integer.toString(i));
             }
             else{
-                button[i] = new JToggleButton(content.get(i).getDefinitions().getFirst());
+                button[i] = new JButton(content.get(i).getDefinitions().getFirst());
+                button[i].setActionCommand(Integer.toString(i));
             }
-            button[i].setName(""+i);
+            button[i].addActionListener(action);
         }
 
         // Button figure
-        for (JToggleButton eachButton:button){
+        for (JButton eachButton:button){
             eachButton.setFont(font);
         }
         int[] position_gridx = {
@@ -141,5 +159,42 @@ public class QuizSlangView extends JFrame{
             contentPage.add(button[i],gbcButtons);
         }
         return contentPage;
+    }
+
+    public void displayRightChoose() {
+        button[rightOption].setBackground(Color.GREEN);
+        JOptionPane.showMessageDialog(this,"Congratulations!!!");
+        for (JButton jButton : button) {
+            jButton.setEnabled(false);
+            jButton.setForeground(Color.BLACK);
+        }
+    }
+    public void displayWrongChoose(String str) {
+        button[rightOption].setBackground(Color.GREEN);
+        button[Integer.parseInt(str)].setBackground(Color.RED);
+        JOptionPane.showMessageDialog(this,"Wrong answer!!!");
+        for (JButton jButton : button) {
+            jButton.setEnabled(false);
+            jButton.setForeground(Color.BLACK);
+        }
+    }
+
+    public void randomNew() {
+        content.clear();
+        for (int i=0;i<4;i++){
+            content.add(Main.listSlangWord.randomOneSlang());
+        }
+        rightOption = random.nextInt(4);
+        questionLabel.setText("Slang: " + content.get(rightOption).getSlang());
+        for (int i = 0;i <button.length;i++){
+            button[i].setEnabled(true);
+            button[i].setBackground(null);
+            if (i==rightOption){
+                button[i].setText(content.get(rightOption).getDefinitions().getFirst());
+            }
+            else{
+                button[i].setText(content.get(i).getDefinitions().getFirst());
+            }
+        }
     }
 }
