@@ -14,16 +14,26 @@ import java.util.*;
 public class SlangFileHelpers implements FileHelpers<ListSlangWord> {
     private String path;
 
+    private SlangFileHelpers() {
+    }
+
+    private SlangFileHelpers(String path) {
+        this.path = path;
+    }
+
+    private static class SingletonHelper {
+        private static final SlangFileHelpers INSTANCE = new SlangFileHelpers();
+    }
+
+    public static SlangFileHelpers getInstance() {
+        return SingletonHelper.INSTANCE;
+    }
+
     public String getPath() {
         return path;
     }
 
     public void setPath(String path) {
-        this.path = path;
-    }
-    public SlangFileHelpers() {
-    }
-    public SlangFileHelpers(String path) {
         this.path = path;
     }
 

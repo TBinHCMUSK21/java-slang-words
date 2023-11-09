@@ -186,6 +186,7 @@ public class AddSlangView extends JFrame {
             Main.listSlangWord.getListSlangWord().put(slang,definition);
             JOptionPane.showMessageDialog(this,"Success!!!");
         }
-
+        this.slangField.setText("");
+        this.definitionField.setText("");
     }
 }

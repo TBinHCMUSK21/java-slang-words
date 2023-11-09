@@ -74,7 +74,6 @@ public class OneSlangWord {
             }
             else builder.append(string);
         }
-        builder.append("\n");
         return builder.toString();
     }
 }

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="_2023-CSC13102-PA01-Slang-Word:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/_2023_CSC13102_PA01_Slang_Word_jar</output-path>
+    <root id="archive" name="_2023-CSC13102-PA01-Slang-Word.jar">
+      <element id="module-output" name="_2023-CSC13102-PA01-Slang-Word" />
+    </root>
+  </artifact>
+</component>

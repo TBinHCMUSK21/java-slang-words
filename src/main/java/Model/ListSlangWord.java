@@ -53,6 +53,7 @@ public class ListSlangWord {
             LinkedHashSet<String> value = entry.getValue();
             OneSlangWord slang = new OneSlangWord(key,value);
             builder.append(slang.toString());
+            builder.append("\n");
         }
         return builder.toString();
     }

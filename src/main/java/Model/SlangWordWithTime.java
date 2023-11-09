@@ -7,6 +7,9 @@
 
 package Model;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashSet;
+import java.util.Map;
 
 public class SlangWordWithTime {
     private OneSlangWord slangWords;
@@ -16,6 +19,7 @@ public class SlangWordWithTime {
         this.slangWords = slangWords;
         this.time = time;
     }
+
 
     public OneSlangWord getSlangWords() {
         return slangWords;
@@ -31,6 +35,16 @@ public class SlangWordWithTime {
 
     public void setTime(LocalDateTime time) {
         this.time = time;
+    }
+
+    public String toString(){
+        StringBuilder builder = new StringBuilder();
+        builder.append(this.slangWords.toString());
+        builder.append("`");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss");
+        String formattedDateTime = time.format(formatter);
+        builder.append(formattedDateTime);
+        return builder.toString();
     }
 
 }
