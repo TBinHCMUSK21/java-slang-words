@@ -150,18 +150,16 @@ public class QuizSlangView extends JFrame{
         // Add the button
         Dimension buttonSize = new Dimension(150, 40);
         for (int i = 0;i <button.length;i++){
+            String buttonText;
             if (i==rightOption){
-                String buttonText = content.get(rightOption).getDefinitions().getFirst();
-                button[i] = new JButton(buttonText);
-                button[i].setToolTipText(buttonText);
-                button[i].setActionCommand(Integer.toString(i));
+                buttonText = content.get(rightOption).getDefinitions().getFirst();
             }
             else{
-                String buttonText = content.get(i).getDefinitions().getFirst();
-                button[i] = new JButton(buttonText);
-                button[i].setToolTipText(buttonText);
-                button[i].setActionCommand(Integer.toString(i));
+                buttonText = content.get(i).getDefinitions().getFirst();
             }
+            button[i] = new JButton(buttonText);
+            button[i].setToolTipText(buttonText);
+            button[i].setActionCommand(Integer.toString(i));
             button[i].setPreferredSize(buttonSize);
             button[i].addActionListener(action);
 

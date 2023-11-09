@@ -86,7 +86,7 @@ public class SearchSlangView extends JFrame {
         JPanel searchPanel = new JPanel();
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.PAGE_AXIS));
         searchPanel.add(createInputPanel(font), BorderLayout.NORTH);
-        searchPanel.add(createListScroller(font), BorderLayout.CENTER);
+        searchPanel.add(createListScroller(), BorderLayout.CENTER);
         return searchPanel;
     }
 
@@ -119,7 +119,7 @@ public class SearchSlangView extends JFrame {
         button.setFont(font);
         return  button;
     }
-    private JScrollPane createListScroller(Font font) {
+    private JScrollPane createListScroller() {
         listModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {
             public boolean isCellEditable(int row, int column) {
                 // Not edit the table

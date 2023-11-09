@@ -10,23 +10,17 @@ package View;
 import Controller.EditSlangController;
 import Controller.TableModelChangeController;
 import Main.Main;
-import Model.OneSlangWord;
-import Model.SlangWordWithTime;
 import Utils.HistorySlangFileHelpers;
 import Utils.SlangFileHelpers;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.Vector;
 
 
 public class EditSlangView extends JFrame {

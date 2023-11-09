@@ -31,13 +31,9 @@ public class Main{
         HistorySlangFileHelpers fileHelpersHistory = HistorySlangFileHelpers.getInstance();
         fileHelpersHistory.setPath("history-slang.txt");
         historySlangWord = fileHelpersHistory.readAllLines();
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+        javax.swing.SwingUtilities.invokeLater(() -> createAndShowGUI());
     }
     public static void createAndShowGUI() {
-        HomePageView view = new HomePageView();
+        new HomePageView();
     }
 }

@@ -158,9 +158,6 @@ public class DeleteSlangView extends JFrame{
         deleteButton.setText("Delete");
         deleteButton.addActionListener(action);
         inputPanel.add(deleteButton,gbc);
-        // buttonPanel.add(deleteButton);
-
-        // inputPanel.add(buttonPanel,gbc);
 
         return inputPanel;
     }

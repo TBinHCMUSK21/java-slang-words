@@ -12,8 +12,6 @@ import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 
 
-import Main.*;
-
 public class SearchSlangController implements Action {
     private final SearchSlangView currentView;
     public SearchSlangController(SearchSlangView currentView ){

@@ -15,7 +15,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 
 import Controller.SearchDefinitionController;
@@ -89,7 +89,7 @@ public class SearchDefinitionView extends JFrame {
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.PAGE_AXIS));
 
         searchPanel.add(createInputPanel(font), BorderLayout.NORTH);
-        searchPanel.add(createListScroller(font), BorderLayout.CENTER);
+        searchPanel.add(createListScroller(), BorderLayout.CENTER);
 
         return searchPanel;
     }
@@ -125,7 +125,7 @@ public class SearchDefinitionView extends JFrame {
         return button;
     }
 
-    private JScrollPane createListScroller(Font font) {
+    private JScrollPane createListScroller() {
         listModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) { public boolean isCellEditable(int row, int column) {
             // Not edit the table
             return false;
@@ -174,7 +174,7 @@ public class SearchDefinitionView extends JFrame {
         else{
             LocalDateTime time = LocalDateTime.now();
             Main.historySlangWord.add(new SlangWordWithTime(new OneSlangWord(null,
-                    new LinkedHashSet<>(Arrays.asList(definition))),time));
+                    new LinkedHashSet<>(Collections.singletonList(definition))),time));
             JOptionPane.showMessageDialog(this,"Not Found");
         }
     }

@@ -152,18 +152,16 @@ public class QuizDefinitionView extends JFrame{
         // Add the button
         Dimension buttonSize = new Dimension(150, 40);
         for (int i = 0;i <button.length;i++){
+            String buttonText;
             if (i==rightOption){
-                String buttonText = content.get(rightOption).getSlang();
-                button[i] = new JButton(buttonText);
-                button[i].setToolTipText(buttonText);
-                button[i].setActionCommand(Integer.toString(i));
+                buttonText = content.get(rightOption).getSlang();
             }
             else{
-                String buttonText = content.get(i).getSlang();
-                button[i] = new JButton(buttonText);
-                button[i].setToolTipText(buttonText);
-                button[i].setActionCommand(Integer.toString(i));
+                buttonText = content.get(i).getSlang();
             }
+            button[i] = new JButton(buttonText);
+            button[i].setToolTipText(buttonText);
+            button[i].setActionCommand(Integer.toString(i));
             button[i].setPreferredSize(buttonSize);
             button[i].addActionListener(action);
 

@@ -9,7 +9,6 @@ package View;
 
 import Controller.ResetSlangController;
 import Main.Main;
-import Model.OneSlangWord;
 import Utils.HistorySlangFileHelpers;
 import Utils.SlangFileHelpers;
 
