@@ -45,7 +45,6 @@ public class AddSlangView extends JFrame {
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-
                 HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
                 historySlangFileHelpers.setPath("history-slang.txt");
                 try {

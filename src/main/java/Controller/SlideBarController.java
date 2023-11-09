@@ -8,12 +8,12 @@
 package Controller;
 
 import View.*;
-
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 public class SlideBarController implements MouseListener {
-    private JFrame currentView;
+    private JFrame currentView = null;
 
     public SlideBarController(JFrame mainFrame) {
         this.currentView = mainFrame;
@@ -21,53 +21,66 @@ public class SlideBarController implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        JFrame newView = null;
         String ec = e.getComponent().getName();
         switch (ec) {
             case "HomePage" -> {
                 currentView.setVisible(false);
                 currentView = new HomePageView();
+                break;
             }
             case "Search by slang word" -> {
                 currentView.setVisible(false);
                 currentView = new SearchSlangView();
+                break;
             }
             case "Search by definition" -> {
                 currentView.setVisible(false);
                 currentView = new SearchDefinitionView();
+                break;
             }
             case "Display history search" -> {
                 currentView.setVisible(false);
                 currentView = new HistoryPageView();
+                break;
             }
             case "Add a new slang word" -> {
                 currentView.setVisible(false);
                 currentView = new AddSlangView();
+                break;
             }
             case "Edit a slang word" -> {
                 currentView.setVisible(false);
-                currentView = new EditSlangView();
+                currentView =new EditSlangView();
+                break;
             }
             case "Delete a slang word" -> {
                 currentView.setVisible(false);
                 currentView = new DeleteSlangView();
+                break;
             }
             case "Reset the origin slang word" -> {
                 currentView.setVisible(false);
                 currentView = new ResetSlangView();
+                break;
             }
             case "Random slang word" -> {
                 currentView.setVisible(false);
                 currentView = new RandomSlangView();
+                break;
             }
             case "Game with slang word" -> {
                 currentView.setVisible(false);
                 currentView = new QuizSlangView();
+                break;
             }
             case "Game with definitions" -> {
                 currentView.setVisible(false);
                 currentView = new QuizDefinitionView();
+                break;
             }
         }
+
     }
 
     @Override
@@ -90,3 +103,6 @@ public class SlideBarController implements MouseListener {
 
     }
 }
+
+
+

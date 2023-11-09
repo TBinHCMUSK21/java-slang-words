@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main{
-
     public static ListSlangWord listSlangWord;
+
     public static ArrayList<SlangWordWithTime> historySlangWord;
     public static ListSlangWord originSlangWord;
     public static void main(String[] args) throws IOException {
@@ -31,6 +31,7 @@ public class Main{
         HistorySlangFileHelpers fileHelpersHistory = HistorySlangFileHelpers.getInstance();
         fileHelpersHistory.setPath("history-slang.txt");
         historySlangWord = fileHelpersHistory.readAllLines();
+
         javax.swing.SwingUtilities.invokeLater(() -> createAndShowGUI());
     }
     public static void createAndShowGUI() {
