@@ -9,6 +9,8 @@ package View;
 
 import Controller.AddSlangController;
 import Main.Main;
+import Utils.FileHelpers;
+import Utils.SlangFileHelpers;
 
 import javax.swing.*;
 import java.awt.*;

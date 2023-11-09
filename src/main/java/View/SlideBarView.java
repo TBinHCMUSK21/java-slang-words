@@ -12,6 +12,9 @@ import java.awt.event.MouseListener;
 
 public class SlideBarView extends JPanel {
 
+    public static HomePageView homePageView;
+    public  static SearchSlangView searchSlangView;
+
     public SlideBarView(JFrame currentFrame) {
         MouseListener action = new SlideBarController(currentFrame);
         /*

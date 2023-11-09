@@ -10,11 +10,11 @@ import Model.ListSlangWord;
 import Model.SlangWordWithTime;
 import Utils.HistorySlangFileHelpers;
 import Utils.SlangFileHelpers;
-import View.*;
+import View.HomePageView;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Main {
+public class Main{
 
     public static ListSlangWord listSlangWord;
     public static ArrayList<SlangWordWithTime> historySlangWord;
@@ -37,7 +37,7 @@ public class Main {
             }
         });
     }
-    private static void createAndShowGUI() {
-        HomePageView homePage=new HomePageView();
+    public static void createAndShowGUI() {
+        HomePageView view = new HomePageView();
     }
 }
