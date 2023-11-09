@@ -22,6 +22,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 
 public class SearchSlangView extends JFrame {
@@ -155,15 +156,18 @@ public class SearchSlangView extends JFrame {
     public void findSlang() {
         listModel.setRowCount(0);
         String slang = searchField.getText();
-        if (Main.listSlangWord.getListSlangWord().get(slang)!=null){
-           LinkedHashSet<String> definition = Main.listSlangWord.searchBySlang(slang);
-           int count = 1;
-           for (String string:definition){
-               listModel.addRow(new Object[]{count,slang,string});
-               count = count + 1;
-           }
-           LocalDateTime time = LocalDateTime.now();
-           Main.historySlangWord.add(new SlangWordWithTime(new OneSlangWord(slang,definition),time));
+        LinkedHashSet<String> slangFind = Main.listSlangWord.searchBySlang(slang);
+        if (!slangFind.isEmpty()){
+            int count = 1;
+            for (String slangItem:slangFind){
+                LinkedHashSet<String> definition = Main.listSlangWord.getListSlangWord().get(slangItem);
+                for (String string:definition){
+                    listModel.addRow(new Object[]{count,slangItem,string});
+                    count = count + 1;
+                }
+                LocalDateTime time = LocalDateTime.now();
+                Main.historySlangWord.add(new SlangWordWithTime(new OneSlangWord(slang,definition),time));
+            }
         }
         else{
             LocalDateTime time = LocalDateTime.now();

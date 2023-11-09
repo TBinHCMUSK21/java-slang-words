@@ -211,14 +211,17 @@ public class EditSlangView extends JFrame {
     public void findTheSlang() {
         tableModel.setRowCount(0);
         String slang = slangField.getText();
+        LinkedHashSet<String> slangFind = Main.listSlangWord.searchBySlang(slang);
         previousTableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning"}, 0) {};
-        if (Main.listSlangWord.getListSlangWord().get(slang)!=null){
-            LinkedHashSet<String> definition = Main.listSlangWord.searchBySlang(slang);
+        if (!slangFind.isEmpty()){
             int count = 1;
-            for (String string:definition){
-                tableModel.addRow(new Object[]{count,slang,string});
-                previousTableModel.addRow(new Object[]{count,slang,string});
-                count = count + 1;
+            for (String slangItem:slangFind){
+                LinkedHashSet<String> definition = Main.listSlangWord.getListSlangWord().get(slangItem);
+                for (String string:definition) {
+                    tableModel.addRow(new Object[]{count, slang, string});
+                    previousTableModel.addRow(new Object[]{count, slang, string});
+                    count = count + 1;
+                }
             }
         }
         else{

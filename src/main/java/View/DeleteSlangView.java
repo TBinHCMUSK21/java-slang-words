@@ -228,7 +228,7 @@ public class DeleteSlangView extends JFrame{
         String slang = slangField.getText();
         tableModel.setRowCount(0);
         if (Main.listSlangWord.getListSlangWord().get(slang)!=null){
-            LinkedHashSet<String> definition = Main.listSlangWord.searchBySlang(slang);
+            LinkedHashSet<String> definition = Main.listSlangWord.getListSlangWord().get(slang);
             int count = 1;
             for (String string:definition){
                 tableModel.addRow(new Object[]{count,slang,string});

@@ -66,7 +66,13 @@ public class ListSlangWord {
         }
     }
     public LinkedHashSet<String> searchBySlang(String slang) {
-        return this.listSlangWord.get(slang);
+        LinkedHashSet<String> result = new LinkedHashSet<>();
+        for (Map.Entry<String, LinkedHashSet<String>> entry : this.listSlangWord.entrySet()) {
+            if (entry.getKey().contains(slang)){
+                result.add(entry.getKey());
+            }
+        }
+        return result;
     }
     public LinkedHashSet<String> searchByDefinition (String definition) {
         LinkedHashSet<String> result = new LinkedHashSet<>();
