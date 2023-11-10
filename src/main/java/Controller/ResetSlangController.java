@@ -52,7 +52,7 @@ public class ResetSlangController implements Action {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Reset")){
             currentView.resetTheOrigin();
+            JOptionPane.showMessageDialog(currentView,"Success");
         }
-        JOptionPane.showMessageDialog(currentView,"Success");
     }
 }

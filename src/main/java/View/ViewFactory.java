@@ -7,7 +7,6 @@
 
 package View;
 import Enum.*;
-
 import javax.swing.*;
 
 

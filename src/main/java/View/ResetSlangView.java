@@ -105,13 +105,7 @@ public class ResetSlangView extends JPanel {
         header.setFont(tableFont);
 
         // Add data to table
-        int count = 1;
-        for (Map.Entry<String, LinkedHashSet<String>> entry : listSlangWord.getListSlangWord().entrySet()) {
-            String key = entry.getKey();
-            LinkedHashSet<String> value = entry.getValue();
-            tableModel.addRow(new Object[]{count,key,value});
-            count++;
-        }
+        update();
 
         // Attribute for table
         table.setFillsViewportHeight(false);
@@ -122,9 +116,18 @@ public class ResetSlangView extends JPanel {
     }
 
     public void resetTheOrigin() {
-
         Main.listSlangWord.copy(originSlangWord);
         tableModel.setRowCount(0);
+        int count = 1;
+        for (Map.Entry<String, LinkedHashSet<String>> entry : listSlangWord.getListSlangWord().entrySet()) {
+            String key = entry.getKey();
+            LinkedHashSet<String> value = entry.getValue();
+            tableModel.addRow(new Object[]{count,key,value});
+            count++;
+        }
+    }
+    public void update(){
+        this.tableModel.setRowCount(0);
         int count = 1;
         for (Map.Entry<String, LinkedHashSet<String>> entry : listSlangWord.getListSlangWord().entrySet()) {
             String key = entry.getKey();

@@ -116,7 +116,7 @@ public class HistoryPageView extends JPanel{
         header.setFont(tableFont);
 
         // Add data to table
-        updateHistory();
+        update();
 
         // Feature for table
         table.setFillsViewportHeight(false);
@@ -151,7 +151,7 @@ public class HistoryPageView extends JPanel{
 
     }
 
-    public void updateHistory() {
+    public void update() {
         this.tableModel.setRowCount(0);
         int count = 1;
         for (SlangWordWithTime slangWord:Main.historySlangWord) {

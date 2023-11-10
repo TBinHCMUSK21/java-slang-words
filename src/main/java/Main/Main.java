@@ -25,14 +25,14 @@ public class Main{
 
         SlangFileHelpers fileHelperIn = SlangFileHelpers.getInstance();
 
-        fileHelperIn.setPath("data/slang.txt");
+        fileHelperIn.setPath("./data/slang.txt");
         originSlangWord = fileHelperIn.readAllLines();
 
-        File file = new File("data/slang-new.txt");
+        File file = new File("./data/slang-new.txt");
         if (file.exists()){
-            fileHelperIn.setPath("data/slang-new.txt");
+            fileHelperIn.setPath("./data/slang-new.txt");
         }
-        else fileHelperIn.setPath("data/slang.txt");
+        else fileHelperIn.setPath("./data/slang.txt");
 
         listSlangWord = fileHelperIn.readAllLines();
 
@@ -47,14 +47,14 @@ public class Main{
             @Override
             public void windowClosing(WindowEvent e) {
                 SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
-                fileHelpersOut.setPath("data/slang-new.txt");
+                fileHelpersOut.setPath("./data/slang-new.txt");
                 try {
                     fileHelpersOut.writeLines(Main.listSlangWord);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
                 HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
-                historySlangFileHelpers.setPath("data/history-slang.txt");
+                historySlangFileHelpers.setPath("./data/history-slang.txt");
                 try {
                     historySlangFileHelpers.writeLines(Main.historySlangWord);
                 } catch (IOException ex) {

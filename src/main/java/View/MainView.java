@@ -11,12 +11,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 
+import Controller.MainViewController;
 import Enum.*;
 
-public class MainView  extends JFrame implements ActionListener{
-    JPanel cardPanel;
-    CardLayout cardLayout;
-    HashMap<String,JPanel> map = new HashMap<>();
+public class MainView  extends JFrame{
+    public JPanel cardPanel;
+    public CardLayout cardLayout;
+    public HashMap<String,JPanel> map = new HashMap<>();
 
     public MainView() {
         setTitle("Slang words dictionary");
@@ -45,31 +46,21 @@ public class MainView  extends JFrame implements ActionListener{
         cardLayout = new CardLayout();
         cardPanel.setLayout(cardLayout);
 
-
+        MainViewController action = new MainViewController(this);
         for (int i = 0; i < ViewType.values().length; i++) {
             JButton button = new JButton(titleOfTheSideBar[i]);
             leftPanel.add(button);
-            button.addActionListener(this);
+            button.addActionListener(action);
             JPanel panel = ViewFactory.getView(ViewType.values()[i]);
             cardPanel.add(panel,titleOfTheSideBar[i]);
             map.put(titleOfTheSideBar[i],panel);
         }
-
 
         Container contentPane = getContentPane();
         contentPane.add(leftPanel, BorderLayout.WEST);
         contentPane.add(cardPanel);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Display history search")){
-            JPanel origin = map.get("Display history search");
-            HistoryPageView newPanel = (HistoryPageView)(origin);
-            newPanel.updateHistory();
-        }
-        cardLayout.show(cardPanel, e.getActionCommand());
-    }
 }

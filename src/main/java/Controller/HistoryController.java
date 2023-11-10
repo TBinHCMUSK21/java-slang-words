@@ -56,7 +56,8 @@ public class HistoryController implements Action {
             this.currentView.removeAllHistory();
         }
         if (str.equals("Update")){
-            this.currentView.updateHistory();
+            this.currentView.update();
         }
     }
+
 }
