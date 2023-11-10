@@ -12,6 +12,7 @@ import Utils.HistorySlangFileHelpers;
 import Utils.SlangFileHelpers;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import View.*;
@@ -24,14 +25,19 @@ public class Main{
 
         SlangFileHelpers fileHelperIn = SlangFileHelpers.getInstance();
 
-        fileHelperIn.setPath("slang.txt");
+        fileHelperIn.setPath("data/slang.txt");
         originSlangWord = fileHelperIn.readAllLines();
 
-        fileHelperIn.setPath("slang-new.txt");
+        File file = new File("data/slang-new.txt");
+        if (file.exists()){
+            fileHelperIn.setPath("data/slang-new.txt");
+        }
+        else fileHelperIn.setPath("data/slang.txt");
+
         listSlangWord = fileHelperIn.readAllLines();
 
         HistorySlangFileHelpers fileHelpersHistory = HistorySlangFileHelpers.getInstance();
-        fileHelpersHistory.setPath("history-slang.txt");
+        fileHelpersHistory.setPath("data/history-slang.txt");
         historySlangWord = fileHelpersHistory.readAllLines();
 
         javax.swing.SwingUtilities.invokeLater(() -> createAndShowGUI());
@@ -41,14 +47,14 @@ public class Main{
             @Override
             public void windowClosing(WindowEvent e) {
                 SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
-                fileHelpersOut.setPath("slang-new.txt");
+                fileHelpersOut.setPath("data/slang-new.txt");
                 try {
                     fileHelpersOut.writeLines(Main.listSlangWord);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
                 HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
-                historySlangFileHelpers.setPath("history-slang.txt");
+                historySlangFileHelpers.setPath("data/history-slang.txt");
                 try {
                     historySlangFileHelpers.writeLines(Main.historySlangWord);
                 } catch (IOException ex) {
