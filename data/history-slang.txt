@@ -16,3 +16,4 @@ THC`Tetrahydrocannabinol|active ingredient in marijuana`10/11/2023 - 20:20:04
 DTP`Disturbing The Peace`10/11/2023 - 20:20:04
 BINS`Glasses|binoculars`10/11/2023 - 20:20:04
 21127230`Lê Tuấn Bình`10/11/2023 - 20:20:04
+#1`Number one`10/11/2023 - 20:31:32
