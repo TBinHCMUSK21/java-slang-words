@@ -74,10 +74,19 @@ public class HistoryPageView extends JPanel{
 
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        JButton updateButton = new JButton("Update");
+        updateButton.addActionListener(action);
+        updateButton.setText("Update");
+        updateButton.setFont(new Font("Arial", Font.PLAIN, 16));
+
+
         JButton clearButton = new JButton("Clear");
         clearButton.addActionListener(action);
         clearButton.setText("Clear");
         clearButton.setFont(new Font("Arial", Font.PLAIN, 16));
+
+        buttonPane.add(updateButton);
         buttonPane.add(clearButton);
 
         historyPane.add(buttonPane, BorderLayout.PAGE_END);
@@ -107,24 +116,7 @@ public class HistoryPageView extends JPanel{
         header.setFont(tableFont);
 
         // Add data to table
-        int count = 1;
-        for (SlangWordWithTime slangWord:Main.historySlangWord) {
-            String key = slangWord.getSlangWords().getSlang();
-            LinkedHashSet<String> value =slangWord.getSlangWords().getDefinitions();
-            LocalDateTime time = slangWord.getTime();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss");
-            String formattedDateTime = time.format(formatter);
-            if (key==null){
-                key="Not found";
-            }
-            if (value==null){
-                tableModel.addRow(new Object[]{count,key,"Not Found",formattedDateTime});
-            }
-            else{
-                tableModel.addRow(new Object[]{count,key,value,formattedDateTime});
-            }
-            count++;
-        }
+        updateHistory();
 
         // Feature for table
         table.setFillsViewportHeight(false);
@@ -143,19 +135,41 @@ public class HistoryPageView extends JPanel{
         int result = JOptionPane.showOptionDialog(this,
                 "Are you sure to delete all history?",
                 "Slang History",
-                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
                 options[1]);
-        if (result == 1){
-            JOptionPane.showMessageDialog(this,"Cancel!!!");
-        }
-        else{
+        if (result == JOptionPane.YES_OPTION){
             Main.historySlangWord.clear();
             tableModel.setRowCount(0);
             JOptionPane.showMessageDialog(this,"Success!!!");
         }
+        else if (result == JOptionPane.NO_OPTION || result == JOptionPane.CLOSED_OPTION) {
+            JOptionPane.showMessageDialog(this,"Cancel!!!");
+        }
 
+    }
+
+    public void updateHistory() {
+        this.tableModel.setRowCount(0);
+        int count = 1;
+        for (SlangWordWithTime slangWord:Main.historySlangWord) {
+            String key = slangWord.getSlangWords().getSlang();
+            LinkedHashSet<String> value =slangWord.getSlangWords().getDefinitions();
+            LocalDateTime time = slangWord.getTime();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss");
+            String formattedDateTime = time.format(formatter);
+            if (key==null){
+                key="Not found";
+            }
+            if (value==null){
+                tableModel.addRow(new Object[]{count,key,"Not Found",formattedDateTime});
+            }
+            else{
+                tableModel.addRow(new Object[]{count,key,value,formattedDateTime});
+            }
+            count++;
+        }
     }
 }
