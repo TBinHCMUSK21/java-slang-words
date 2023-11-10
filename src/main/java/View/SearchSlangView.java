@@ -1,70 +1,37 @@
 /*
- * View.test
+ * View.SearchSlangTest
  * Create by Bin
- * Date 11/6/23, 9:31 AM
- * Description: Search Slang View
+ * Date 11/10/23, 12:46 PM
+ * Description:
  */
 
 package View;
+
 import Controller.SearchSlangController;
 import Main.Main;
 import Model.OneSlangWord;
 import Model.SlangWordWithTime;
-import Utils.HistorySlangFileHelpers;
-import Utils.SlangFileHelpers;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
-import java.util.List;
 
-
-public class SearchSlangView extends JFrame {
+public class SearchSlangView extends JPanel {
 
     public DefaultTableModel listModel;
     public JTextField searchField;
 
 
     public SearchSlangView() {
-        setTitle("Slang Dictionary Search");
         initializeComponents();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 675);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
-                fileHelpersOut.setPath("slang-new.txt");
-                try {
-                    fileHelpersOut.writeLines(Main.listSlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
-                historySlangFileHelpers.setPath("history-slang.txt");
-                try {
-                    historySlangFileHelpers.writeLines(Main.historySlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
     }
 
     private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
         setLayout(new BorderLayout());
-        SlideBarView sidebar = new SlideBarView(this);
-        add(sidebar, BorderLayout.WEST);
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
 
@@ -92,7 +59,7 @@ public class SearchSlangView extends JFrame {
     }
 
     private JPanel createInputPanel(Font font) {
-        Action action = new SearchSlangController(this);
+        SearchSlangController action = new SearchSlangController(this);
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -143,14 +110,8 @@ public class SearchSlangView extends JFrame {
         table.setRowHeight(30);
 
         // Add table to JScrollPane
-        JScrollPane scrollPane = new JScrollPane(table);
 
-        // Display window
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        return scrollPane;
+        return new JScrollPane(table);
     }
 
     public void findSlang() {

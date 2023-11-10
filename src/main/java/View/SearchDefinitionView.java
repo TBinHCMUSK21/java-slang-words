@@ -1,70 +1,36 @@
 /*
- * View.test
+ * View.SearchDefinitionTest
  * Create by Bin
- * Date 11/6/23, 9:31 AM
- * Description: Search Definition View
+ * Date 11/10/23, 12:56 PM
+ * Description:
  */
 
 package View;
+
+import Controller.SearchDefinitionController;
+import Main.Main;
+import Model.OneSlangWord;
+import Model.SlangWordWithTime;
+
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 
-import Controller.SearchDefinitionController;
-import Main.*;
-import Model.OneSlangWord;
-import Model.SlangWordWithTime;
-import Utils.HistorySlangFileHelpers;
-import Utils.SlangFileHelpers;
-
-
-public class SearchDefinitionView extends JFrame {
+public class SearchDefinitionView extends JPanel {
     public DefaultTableModel listModel;
     public JTextField searchField;
 
     public SearchDefinitionView() {
-        setTitle("Slang Dictionary Search");
         initializeComponents();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 675);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
-                fileHelpersOut.setPath("slang-new.txt");
-                try {
-                    fileHelpersOut.writeLines(Main.listSlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
-                historySlangFileHelpers.setPath("history-slang.txt");
-                try {
-                    historySlangFileHelpers.writeLines(Main.historySlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
     }
     private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
-
         setLayout(new BorderLayout());
-        SlideBarView sidebar = new SlideBarView(this);
-        add(sidebar, BorderLayout.WEST);
-
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
 
@@ -73,7 +39,6 @@ public class SearchDefinitionView extends JFrame {
         mainContent.setBackground(Color.WHITE);
         mainContent.add(createTitle(), BorderLayout.NORTH);
         mainContent.add(createSearchPanel(font), BorderLayout.CENTER);
-
         return mainContent;
     }
 
@@ -87,7 +52,6 @@ public class SearchDefinitionView extends JFrame {
     private JPanel createSearchPanel(Font font) {
         JPanel searchPanel = new JPanel();
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.PAGE_AXIS));
-
         searchPanel.add(createInputPanel(font), BorderLayout.NORTH);
         searchPanel.add(createListScroller(), BorderLayout.CENTER);
 
@@ -146,14 +110,8 @@ public class SearchDefinitionView extends JFrame {
         table.setRowHeight(30);
 
         // Add table to JScrollPane
-        JScrollPane scrollPane = new JScrollPane(table);
 
-        // Display window
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        return scrollPane;
+        return new JScrollPane(table);
     }
 
     public void searchDefinition() {

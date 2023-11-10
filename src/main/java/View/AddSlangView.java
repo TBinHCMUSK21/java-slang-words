@@ -1,26 +1,21 @@
 /*
- * View.AddSlang
+ * View.AddSlangTest
  * Create by Bin
- * Date 11/6/23, 9:55 AM
- * Description: The AddSlang Page
+ * Date 11/10/23, 12:34 PM
+ * Description:
  */
 
 package View;
 
 import Controller.AddSlangController;
 import Main.Main;
-import Utils.HistorySlangFileHelpers;
-import Utils.SlangFileHelpers;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
-public class AddSlangView extends JFrame {
+public class AddSlangView extends JPanel{
 
     public JTextField slangField;
     public JTextField definitionField;
@@ -29,31 +24,7 @@ public class AddSlangView extends JFrame {
      * The main frame
      */
     public AddSlangView() {
-        setTitle("Slang Dictionary Search");
         initializeComponents();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 675);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
-                fileHelpersOut.setPath("slang-new.txt");
-                try {
-                    fileHelpersOut.writeLines(Main.listSlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
-                historySlangFileHelpers.setPath("history-slang.txt");
-                try {
-                    historySlangFileHelpers.writeLines(Main.historySlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
     }
 
     /**
@@ -62,8 +33,6 @@ public class AddSlangView extends JFrame {
     private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
         setLayout(new BorderLayout());
-        SlideBarView sidebar = new SlideBarView(this);
-        add(sidebar, BorderLayout.WEST);
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
 
@@ -111,9 +80,7 @@ public class AddSlangView extends JFrame {
      */
 
     private JPanel createInputPanel(Font font) {
-
         AddSlangController action = new AddSlangController(this);
-
         // Initial the input panel
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridBagLayout());
@@ -183,10 +150,10 @@ public class AddSlangView extends JFrame {
     public void addANewSlang() {
         String slang = slangField.getText();
         String userDefinition = definitionField.getText();
-        LinkedHashSet<String>  definition = new LinkedHashSet<>
+        LinkedHashSet<String> definition = new LinkedHashSet<>
                 (Arrays.stream(userDefinition.split("\\|"))
-                .map(String::trim)
-                .toList());
+                        .map(String::trim)
+                        .toList());
         if (Main.listSlangWord.getListSlangWord().get(slang)!=null){
             Object[] options = {"Overwrite", "Duplicate", "Cancel"};
             int result = JOptionPane.showOptionDialog(this,

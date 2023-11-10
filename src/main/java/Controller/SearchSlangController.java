@@ -7,6 +7,7 @@
 
 package Controller;
 import View.SearchSlangView;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;

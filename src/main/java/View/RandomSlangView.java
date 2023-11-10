@@ -1,8 +1,8 @@
 /*
- * View.RandomSlang
+ * View.RandomSlangTest
  * Create by Bin
- * Date 11/6/23, 12:27 PM
- * Description: Random Slang View
+ * Date 11/10/23, 1:10 PM
+ * Description:
  */
 
 package View;
@@ -10,18 +10,13 @@ package View;
 import Controller.RandomSlangController;
 import Main.Main;
 import Model.OneSlangWord;
-import Utils.HistorySlangFileHelpers;
-import Utils.SlangFileHelpers;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class RandomSlangView extends JFrame{
+public class RandomSlangView extends JPanel {
     public JTextField definitionField;
     public JTextField slangField;
     public JTextField dateField;
@@ -29,44 +24,14 @@ public class RandomSlangView extends JFrame{
      * The layout of frame
      */
     public RandomSlangView() {
-        setTitle("Slang Dictionary Search");
         initializeComponents();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 675);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
-                fileHelpersOut.setPath("slang-new.txt");
-                try {
-                    fileHelpersOut.writeLines(Main.listSlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
-                historySlangFileHelpers.setPath("history-slang.txt");
-                try {
-                    historySlangFileHelpers.writeLines(Main.historySlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
     }
-
     /**
      * The initial components of the layout
      */
     private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
-
         setLayout(new BorderLayout());
-        SlideBarView sidebar = new SlideBarView(this);
-        add(sidebar, BorderLayout.WEST);
-
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
 

@@ -1,29 +1,23 @@
 /*
- * View.EditSlang
+ * View.EditSlangTest
  * Create by Bin
- * Date 11/6/23, 10:27 AM
- * Description: The edit slang words view
+ * Date 11/10/23, 1:04 PM
+ * Description:
  */
 
 package View;
 
+
 import Controller.EditSlangController;
 import Controller.TableModelChangeController;
 import Main.Main;
-import Utils.HistorySlangFileHelpers;
-import Utils.SlangFileHelpers;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.util.LinkedHashSet;
 
-
-public class EditSlangView extends JFrame {
+public class EditSlangView extends JPanel {
     public JTextField slangField;
     public DefaultTableModel tableModel;
 
@@ -33,32 +27,7 @@ public class EditSlangView extends JFrame {
      * Main frame
      */
     public EditSlangView() {
-        setTitle("Slang Dictionary Search");
         initializeComponents();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 675);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
-                fileHelpersOut.setPath("slang-new.txt");
-                try {
-                    fileHelpersOut.writeLines(Main.listSlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
-                historySlangFileHelpers.setPath("history-slang.txt");
-                try {
-                    historySlangFileHelpers.writeLines(Main.historySlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
     }
 
     /**
@@ -66,10 +35,7 @@ public class EditSlangView extends JFrame {
      */
     private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
-
         setLayout(new BorderLayout());
-        SlideBarView sidebar = new SlideBarView(this);
-        add(sidebar, BorderLayout.WEST);
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
 
@@ -146,6 +112,7 @@ public class EditSlangView extends JFrame {
         gbc.weightx = 0.0;
         findButton.setText("Find");
         findButton.addActionListener(action);
+
         inputPanel.add(findButton, gbc);
         return inputPanel;
     }
@@ -198,14 +165,7 @@ public class EditSlangView extends JFrame {
         table.setRowHeight(30);
 
         // Add table to JScrollPane
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        // Display window
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        return scrollPane;
+        return new JScrollPane(table);
     }
 
     public void findTheSlang() {
@@ -243,6 +203,8 @@ public class EditSlangView extends JFrame {
                 Main.listSlangWord.editDefinition(prev_definition,new_definition,prev_slang);
                 JOptionPane.showMessageDialog(this,"Success!!!");
             }
+            this.slangField.setText("");
+            this.tableModel.setRowCount(0);
         }
     }
 }

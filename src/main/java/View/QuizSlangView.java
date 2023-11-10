@@ -1,8 +1,8 @@
 /*
- * View.QuizSlang
+ * View.QuizSlangTest
  * Create by Bin
- * Date 11/6/23, 6:11 PM
- * Description: Quiz Slang View
+ * Date 11/10/23, 1:11 PM
+ * Description:
  */
 
 package View;
@@ -10,18 +10,12 @@ package View;
 import Controller.QuizSlangController;
 import Main.Main;
 import Model.OneSlangWord;
-import Utils.HistorySlangFileHelpers;
-import Utils.SlangFileHelpers;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class QuizSlangView extends JFrame{
+public class QuizSlangView extends JPanel {
     public ArrayList<OneSlangWord> content;
 
     public JLabel questionLabel;
@@ -35,32 +29,7 @@ public class QuizSlangView extends JFrame{
      * The main frame
      */
     public QuizSlangView() {
-        setTitle("Slang Dictionary Search");
         initializeComponents();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 675);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
-                fileHelpersOut.setPath("slang-new.txt");
-                try {
-                    fileHelpersOut.writeLines(Main.listSlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
-                historySlangFileHelpers.setPath("history-slang.txt");
-                try {
-                    historySlangFileHelpers.writeLines(Main.historySlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
     }
 
     /**
@@ -69,8 +38,6 @@ public class QuizSlangView extends JFrame{
     public void initializeComponents(){
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
         setLayout(new BorderLayout());
-        SlideBarView sidebar = new SlideBarView(this);
-        add(sidebar, BorderLayout.WEST);
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
 

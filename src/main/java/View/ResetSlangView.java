@@ -1,66 +1,34 @@
 /*
- * View.ResetSlang
+ * View.ResetSlangTest
  * Create by Bin
- * Date 11/6/23, 11:05 AM
- * Description: Reset View
+ * Date 11/10/23, 1:08 PM
+ * Description:
  */
 
 package View;
 
+
 import Controller.ResetSlangController;
 import Main.Main;
-import Utils.HistorySlangFileHelpers;
-import Utils.SlangFileHelpers;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Map;
 
-import static Main.Main.*;
+import static Main.Main.listSlangWord;
+import static Main.Main.originSlangWord;
 
-public class ResetSlangView extends JFrame {
+public class ResetSlangView extends JPanel {
     public DefaultTableModel tableModel;
     public ResetSlangView() {
-        setTitle("Slang Dictionary Search");
         initializeComponents();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 675);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
-                fileHelpersOut.setPath("slang-new.txt");
-                try {
-                    fileHelpersOut.writeLines(Main.listSlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
-                historySlangFileHelpers.setPath("history-slang.txt");
-                try {
-                    historySlangFileHelpers.writeLines(Main.historySlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
     }
 
     private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
-
         setLayout(new BorderLayout());
-        SlideBarView sidebar = new SlideBarView(this);
-        add(sidebar, BorderLayout.WEST);
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
     private JPanel createMainContent(Font font) {
@@ -150,14 +118,7 @@ public class ResetSlangView extends JFrame {
         table.setRowHeight(30);
 
         // Add table to JScrollPane
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        // Display
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        return scrollPane;
+        return new JScrollPane(table);
     }
 
     public void resetTheOrigin() {

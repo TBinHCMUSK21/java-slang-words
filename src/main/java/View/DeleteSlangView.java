@@ -1,27 +1,22 @@
 /*
- * View.DeleteSlang
+ * View.DeleteSlangTest
  * Create by Bin
- * Date 11/6/23, 11:00 AM
- * Description: Delete Slang View
+ * Date 11/10/23, 1:06 PM
+ * Description:
  */
 
 package View;
 
+
 import Controller.DeleteSlangController;
 import Main.Main;
-import Utils.HistorySlangFileHelpers;
-import Utils.SlangFileHelpers;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.util.LinkedHashSet;
 
-public class DeleteSlangView extends JFrame{
+public class DeleteSlangView extends JPanel {
 
     public JTextField slangField;
     public DefaultTableModel tableModel;
@@ -29,32 +24,7 @@ public class DeleteSlangView extends JFrame{
      * The main frame layout
      */
     public DeleteSlangView() {
-        setTitle("Slang Dictionary Search");
         initializeComponents();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 675);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
-                fileHelpersOut.setPath("slang-new.txt");
-                try {
-                    fileHelpersOut.writeLines(Main.listSlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
-                historySlangFileHelpers.setPath("history-slang.txt");
-                try {
-                    historySlangFileHelpers.writeLines(Main.historySlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
     }
 
     /**
@@ -62,10 +32,7 @@ public class DeleteSlangView extends JFrame{
      */
     private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
-
         setLayout(new BorderLayout());
-        SlideBarView sidebar = new SlideBarView(this);
-        add(sidebar, BorderLayout.WEST);
         add(createMainContent(mainFont), BorderLayout.CENTER);
     }
 
@@ -80,7 +47,6 @@ public class DeleteSlangView extends JFrame{
         mainContent.add(createTitle(), BorderLayout.NORTH);
         mainContent.add(createDeletePanel(font), BorderLayout.CENTER);
         mainContent.add(createSearchPanel(), BorderLayout.SOUTH);
-
         return mainContent;
     }
 
@@ -114,7 +80,6 @@ public class DeleteSlangView extends JFrame{
      */
     private JPanel createInputPanel(Font font) {
         DeleteSlangController action = new DeleteSlangController(this);
-
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridBagLayout());
         inputPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
@@ -139,16 +104,15 @@ public class DeleteSlangView extends JFrame{
         gbc.weightx = 1.0;
         inputPanel.add(slangField, gbc);
 
-        // JPanel buttonPanel = new JPanel();
         gbc.gridy=3;
         gbc.gridx=0;
+
         // Button to find the definition of the slang
         JButton findButton = createButton("Find", font);
         gbc.weightx = 1.0;
         findButton.setText("Find");
         findButton.addActionListener(action);
         inputPanel.add(findButton,gbc);
-        // buttonPanel.add(findButton);
 
         // Button to delete
         gbc.gridy=4;
@@ -215,12 +179,6 @@ public class DeleteSlangView extends JFrame{
         Dimension preferredSize = scrollPane.getPreferredSize();
         preferredSize.height = 370;
         scrollPane.setPreferredSize(preferredSize);
-
-        // Display
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
         return scrollPane;
     }
 

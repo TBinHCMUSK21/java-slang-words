@@ -1,70 +1,37 @@
 /*
- * View.HistoryPage
+ * View.HistoryPageTest
  * Create by Bin
- * Date 11/6/23, 9:23 AM
- * Description: The history page view
+ * Date 11/10/23, 1:00 PM
+ * Description:
  */
 
 package View;
 
+
 import Controller.HistoryController;
 import Main.Main;
 import Model.SlangWordWithTime;
-import Utils.HistorySlangFileHelpers;
-import Utils.SlangFileHelpers;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashSet;
 
-public class HistoryPageView extends JFrame {
+public class HistoryPageView extends JPanel{
     public DefaultTableModel tableModel;
     /**
      * The main frame
      */
     public HistoryPageView() {
-        setTitle("Slang Dictionary Search");
         initializeComponents();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 675);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                SlangFileHelpers fileHelpersOut = SlangFileHelpers.getInstance();
-                fileHelpersOut.setPath("slang-new.txt");
-                try {
-                    fileHelpersOut.writeLines(Main.listSlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                HistorySlangFileHelpers historySlangFileHelpers = HistorySlangFileHelpers.getInstance();
-                historySlangFileHelpers.setPath("history-slang.txt");
-                try {
-                    historySlangFileHelpers.writeLines(Main.historySlangWord);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
     }
-
     /**
      * Add the sidebar
      */
     private void initializeComponents() {
         setLayout(new BorderLayout());
-        SlideBarView sidebar = new SlideBarView(this);
-        add(sidebar, BorderLayout.WEST);
         add(createMainContent(), BorderLayout.CENTER);
     }
 
@@ -125,7 +92,7 @@ public class HistoryPageView extends JFrame {
      * @return listScroller: JScrollPane of the history search
      */
     private JScrollPane createListScroller() {
-         tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning","Time"}, 0) {
+        tableModel = new DefaultTableModel(new Object[]{"STT", "Slang", "Meaning","Time"}, 0) {
             public boolean isCellEditable(int row, int column) {
                 // Not edit the table
                 return false;
@@ -169,11 +136,6 @@ public class HistoryPageView extends JFrame {
         preferredSize.height = 300;
         scrollPane.setPreferredSize(preferredSize);
 
-        // Display window
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
         return scrollPane;
     }
     public void removeAllHistory() {

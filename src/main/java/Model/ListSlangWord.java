@@ -57,6 +57,11 @@ public class ListSlangWord {
         }
         return builder.toString();
     }
+
+    /**
+     * Copy from the another ListSlangWord
+     * @param another
+     */
     public void copy(ListSlangWord another){
         Main.listSlangWord.getListSlangWord().clear();
         for (Map.Entry<String, LinkedHashSet<String>> entry : another.getListSlangWord().entrySet()) {
@@ -65,6 +70,12 @@ public class ListSlangWord {
             this.listSlangWord.put(key,value);
         }
     }
+
+    /**
+     * Search a list of slang word content the slang
+     * @param slang
+     * @return a list of slang word content slang
+     */
     public LinkedHashSet<String> searchBySlang(String slang) {
         LinkedHashSet<String> result = new LinkedHashSet<>();
         for (Map.Entry<String, LinkedHashSet<String>> entry : this.listSlangWord.entrySet()) {
@@ -74,14 +85,20 @@ public class ListSlangWord {
         }
         return result;
     }
+
+    /**
+     * Return a list of key of slang have the definition content an input from user
+     * @param definition
+     * @return list of key slang words
+     */
     public LinkedHashSet<String> searchByDefinition (String definition) {
         LinkedHashSet<String> result = new LinkedHashSet<>();
         for (Map.Entry<String, LinkedHashSet<String>> entry : this.listSlangWord.entrySet()) {
             String key = entry.getKey();
             LinkedHashSet<String> value = entry.getValue();
+            definition=definition.toLowerCase();
             for(String string:value){
                 string = string.toLowerCase();
-                definition=definition.toLowerCase();
                 if (string.contains(definition)){
                     result.add(key);
                 }
