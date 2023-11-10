@@ -60,7 +60,7 @@ public class ListSlangWord {
 
     /**
      * Copy from the another ListSlangWord
-     * @param another
+     * @param another: another list of slang word
      */
     public void copy(ListSlangWord another){
         Main.listSlangWord.getListSlangWord().clear();
@@ -73,8 +73,8 @@ public class ListSlangWord {
 
     /**
      * Search a list of slang word content the slang
-     * @param slang
-     * @return a list of slang word content slang
+     * @param slang: a slang we want to search
+     * @return a set of slang word content slang
      */
     public LinkedHashSet<String> searchBySlang(String slang) {
         LinkedHashSet<String> result = new LinkedHashSet<>();
@@ -88,8 +88,8 @@ public class ListSlangWord {
 
     /**
      * Return a list of key of slang have the definition content an input from user
-     * @param definition
-     * @return list of key slang words
+     * @param definition: a definition we want to search
+     * @return set of key slang words
      */
     public LinkedHashSet<String> searchByDefinition (String definition) {
         LinkedHashSet<String> result = new LinkedHashSet<>();

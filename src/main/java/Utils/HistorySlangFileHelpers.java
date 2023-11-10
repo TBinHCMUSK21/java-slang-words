@@ -6,6 +6,7 @@
  */
 
 package Utils;
+import Interfaces.FileHelpersInterfaces;
 import Model.OneSlangWord;
 import Model.SlangWordWithTime;
 
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class HistorySlangFileHelpers implements FileHelpers<ArrayList<SlangWordWithTime>> {
+public class HistorySlangFileHelpers implements FileHelpersInterfaces<ArrayList<SlangWordWithTime>> {
     private String path;
 
     private HistorySlangFileHelpers() {
@@ -40,7 +41,7 @@ public class HistorySlangFileHelpers implements FileHelpers<ArrayList<SlangWordW
         this.path = path;
     }
     @Override
-    public ArrayList<SlangWordWithTime> readAllLines() throws IOException {
+    public ArrayList<SlangWordWithTime> readAllLines() {
         ArrayList<SlangWordWithTime> data = new ArrayList<>();
         try {
             BufferedReader fin = new BufferedReader(new FileReader(path));

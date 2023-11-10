@@ -6,10 +6,8 @@
  */
 
 package View;
-
 import Controller.AddSlangController;
 import Main.Main;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
@@ -24,13 +22,6 @@ public class AddSlangView extends JPanel{
      * The main frame
      */
     public AddSlangView() {
-        initializeComponents();
-    }
-
-    /**
-     * Initial the sidebar in the left of frame
-     */
-    private void initializeComponents() {
         Font mainFont = new Font("Arial", Font.PLAIN, 18);
         setLayout(new BorderLayout());
         add(createMainContent(mainFont), BorderLayout.CENTER);
@@ -118,7 +109,8 @@ public class AddSlangView extends JPanel{
         inputPanel.add(definitionField, gbc);
 
         // Button add to add the new slang
-        JButton addButton = createButton("Add", font);
+        JButton addButton = new JButton("Add");
+        addButton.setFont(font);
         addButton.setName("Add");
         gbc.weightx = 0.0;
         inputPanel.add(addButton, gbc);
@@ -133,18 +125,6 @@ public class AddSlangView extends JPanel{
         inputPanel.add(new JPanel(), gbcFiller);
 
         return inputPanel;
-    }
-
-    /**
-     * Create the button
-     * @param title: The title of the button
-     * @param font: Font of the button
-     * @return button: JButton of the button
-     */
-    private JButton createButton(String title, Font font) {
-        JButton button = new JButton(title);
-        button.setFont(font);
-        return button;
     }
 
     public void addANewSlang() {

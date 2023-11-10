@@ -7,8 +7,6 @@
 
 package Enum;
 
-import View.View;
-
 public enum ViewType {
     HOME,SEARCH_SLANG,SEARCH_DEFINITION,HISTORY,ADD,
     EDIT,DELETE, RESET, RANDOM, QUIZ_SLANG, QUIZ_DEFINITION

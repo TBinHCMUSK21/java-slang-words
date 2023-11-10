@@ -55,4 +55,4 @@ https://viettuts.vn/java-swing/borderlayout-trong-java-swing
 
 https://codelearn.io/sharing/hash-map-trong-java
 
-Mức độ tham khảo: 2%-4%
+Mức độ tham khảo: 2%-5%

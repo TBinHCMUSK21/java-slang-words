@@ -6,12 +6,13 @@
  */
 
 package Utils;
+import Interfaces.FileHelpersInterfaces;
 import Model.ListSlangWord;
 
 import java.io.*;
 import java.util.*;
 
-public class SlangFileHelpers implements FileHelpers<ListSlangWord> {
+public class SlangFileHelpers implements FileHelpersInterfaces<ListSlangWord> {
     private String path;
 
     private SlangFileHelpers() {

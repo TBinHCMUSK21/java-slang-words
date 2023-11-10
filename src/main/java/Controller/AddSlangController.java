@@ -28,7 +28,6 @@ public class AddSlangController implements Action {
     public void putValue(String key, Object value) {
 
     }
-
     @Override
     public void setEnabled(boolean b) {
 

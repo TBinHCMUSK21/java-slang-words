@@ -11,7 +11,6 @@ import Controller.SearchSlangController;
 import Main.Main;
 import Model.OneSlangWord;
 import Model.SlangWordWithTime;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -110,7 +109,6 @@ public class SearchSlangView extends JPanel {
         table.setRowHeight(30);
 
         // Add table to JScrollPane
-
         return new JScrollPane(table);
     }
 

@@ -10,7 +10,6 @@ import Model.ListSlangWord;
 import Model.SlangWordWithTime;
 import Utils.HistorySlangFileHelpers;
 import Utils.SlangFileHelpers;
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -19,7 +18,6 @@ import View.*;
 
 public class Main{
     public static ListSlangWord listSlangWord;
-
     public static ArrayList<SlangWordWithTime> historySlangWord;
     public static ListSlangWord originSlangWord;
     public static void main(String[] args) throws IOException {
